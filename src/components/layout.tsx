@@ -1,8 +1,31 @@
 import { PageRendererProps } from "gatsby"
-import React, { ReactNode } from "react"
-import styled from "styled-components"
+import React, { ReactNode, useState } from "react"
+import styled, { keyframes } from "styled-components"
+import Modal from "styled-react-modal"
 import { rhythm, styledScale } from "../utils/typography"
 import { FadeLink } from "./link"
+
+const ZoomIn = keyframes`
+    from {
+      transform: scale3d(.3, .3, .3);
+    }
+`
+
+const StyledModal = Modal.styled`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+`
+
+const AnimatedModal = styled(StyledModal)<{ isOpen: boolean }>`
+  animation-name: ${ZoomIn};
+  animation-timing-function: cubic-bezier(0.4, 0, 0, 1.5);
+  animation-duration: 0.3s;
+  animation-delay: 0s;
+`
 
 interface Props extends PageRendererProps {
   title: string
@@ -34,6 +57,8 @@ const Content = styled.div`
 `
 
 export const Layout = (props: Props) => {
+  const [isShowing, setIsShowing] = useState(false)
+
   const { location, title, children } = props
   const rootPath = `/`
 
@@ -48,6 +73,21 @@ export const Layout = (props: Props) => {
       </header>
       <main>{children}</main>
       <footer>
+        <a
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            setIsShowing(true)
+          }}
+        >
+          Inquiries
+        </a>
+        <AnimatedModal isOpen={isShowing} allowScroll={false}>
+          <div>
+            <span>I am a modal!</span>
+            <button onClick={() => setIsShowing(false)}>Close me</button>
+          </div>
+        </AnimatedModal>
         © {new Date().getFullYear()}, Built with
         {` `}
         <a href="https://www.gatsbyjs.org">Gatsby</a>

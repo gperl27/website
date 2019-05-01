@@ -10,7 +10,7 @@ const encode = (data: { [key: string]: any }) => {
     .join("&")
 }
 
-const Form = (props: Props) => {
+export const Form = (props: Props) => {
   const [fields, setFields] = useState({})
 
   const handleChange = (

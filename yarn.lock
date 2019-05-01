@@ -1432,7 +1432,7 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/styled-components@^4.1.14":
+"@types/styled-components@*", "@types/styled-components@^4.1.14":
   version "4.1.14"
   resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-4.1.14.tgz#fe029b0bfb2d26af7f9bd4dd4811b31961ff6d49"
   integrity sha512-X5t+uomPU9vxWNnfEpw2W7RtJDpsWCsBizQq95gB2QXrG5qsALV1/H7tfv4xYhTmiG5CGtcbfp4nU4yhhEqTsw==
@@ -1440,6 +1440,14 @@
     "@types/react" "*"
     "@types/react-native" "*"
     csstype "^2.2.0"
+
+"@types/styled-react-modal@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@types/styled-react-modal/-/styled-react-modal-1.1.1.tgz#71541f750cf8691520c176f3b0fe1df37884b657"
+  integrity sha512-Cs662bEPhGj4DHY1dq/P1mGd4tSP9CbvLtYBGGlLcGgsxHtlreEdjFHY5HXilNx8qsF0dtmRoUwH0D7QqgkrcA==
+  dependencies:
+    "@types/react" "*"
+    "@types/styled-components" "*"
 
 "@types/tmp@^0.0.32":
   version "0.0.32"
@@ -11928,6 +11936,11 @@ styled-components@^4.2.0:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
+
+styled-react-modal@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/styled-react-modal/-/styled-react-modal-1.2.1.tgz#34fdfd5fa153f6f8f5da0409a44556f5f6a0dfc2"
+  integrity sha512-as3hRyP/E1tJb6fhw03jqi8ppR9eLLWBjltzUrXb/QnRm29vunwybzVaILgcXz8E5tOszcEiRJRPr3f0Jui+zA==
 
 stylehacks@^4.0.0:
   version "4.0.3"

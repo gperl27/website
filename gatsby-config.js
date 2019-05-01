@@ -76,6 +76,6 @@ module.exports = {
     },
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-transition-link`,
+    `gatsby-plugin-transition-link`
   ],
 }
