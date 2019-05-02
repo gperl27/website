@@ -309,11 +309,7 @@ export const Form = (props: Props) => {
             </InputWrapper>
             <InputWrapper>
               <label>Phone</label>
-              <TextInput
-                type="text"
-                name="phone"
-                onChange={handleChange}
-              />
+              <TextInput type="text" name="phone" onChange={handleChange} />
             </InputWrapper>
           </LeftBaseFormContainer>
           <RightBaseFormContainer>
