@@ -1,60 +1,30 @@
 import { PageRendererProps } from "gatsby"
-import Slider from "rc-slider"
+import { createSliderWithTooltip, Range } from "rc-slider"
 // tslint:disable-next-line:no-submodule-imports
 import "rc-slider/assets/index.css"
 import React, { ChangeEvent, useState } from "react"
-import styled, { css } from "styled-components"
+import styled, { keyframes } from "styled-components"
+import Modal from "styled-react-modal"
+import { Button } from "../components/common/Button"
+import { TextArea } from "../components/common/TextArea"
+import { TextInput } from "../components/common/TextInput"
 import { Layout } from "../components/layout"
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip
-const Range = createSliderWithTooltip(Slider.Range)
+const RangeWithTooltip = createSliderWithTooltip(Range)
+
+const DEFAULT_SALARY_RANGE = [140, 250]
+const DEFAULT_TIMELINE_RANGE = [3, 6]
+const DEFAULT_BUDGET_RANGE = [25, 100]
 
 type Props = PageRendererProps
+
+type PersonType = "recruiter" | "entrepreneur"
 
 const encode = (data: { [key: string]: any }) => {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
     .join("&")
 }
-
-const BaseInputCss = css`
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  border-radius: 4px;
-  background-color: #fff;
-  appearance: none;
-  align-items: center;
-  border: 1px solid #dbdbdb;
-  display: inline-flex;
-  justify-content: flex-start;
-  line-height: 1.5;
-  padding: calc(0.375em - 1px) calc(0.625em - 1px);
-  position: relative;
-  vertical-align: top;
-  max-width: 100%;
-  width: 100%;
-  outline: 0;
-  font-size: 1.2rem;
-
-  &:hover {
-    border-color: #b5b5b5;
-  }
-
-  &:active,
-  &:focus {
-    box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
-    border-color: #3273dc;
-  }
-`
-
-const StyledInput = styled.input`
-  height: 2.25em;
-  ${BaseInputCss};
-`
-
-const StyledTextArea = styled.textarea`
-  ${BaseInputCss};
-  resize: none;
-`
 
 const InputWrapper = styled.div`
   box-sizing: border-box;
@@ -65,15 +35,21 @@ const InputWrapper = styled.div`
 
 const BaseFormContainer = styled.div`
   display: flex;
-`
 
-const BaseFormColumn = styled.div``
+  @media (max-width: 991px) {
+    flex-wrap: wrap;
+  }
+`
 
 const LeftBaseFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-right: 1rem;
+
+  @media (max-width: 991px) {
+    padding: initial;
+  }
 `
 
 const RightBaseFormContainer = styled.div`
@@ -82,6 +58,10 @@ const RightBaseFormContainer = styled.div`
   width: 100%;
   padding-left: 1rem;
   text-align: center;
+
+  @media (max-width: 991px) {
+    padding: initial;
+  }
 `
 
 const AboutButtons = styled.div`
@@ -101,43 +81,15 @@ const SalarySlider = styled(SliderWrapper)`
   margin-top: 1rem;
 `
 
-const DEFAULT_SALARY_RANGE = [120, 140]
-
-type PersonType = "recruiter" | "entrepreneur"
-
-const StyledButton = styled.button`
-  appearance: none;
-  align-items: center;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  box-shadow: none;
-  display: inline-flex;
+const CloseButton = styled.div`
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
   font-size: 1rem;
-  height: 2.25em;
-  justify-content: flex-start;
-  line-height: 1.5;
-  padding: calc(0.375em - 1px) calc(0.625em - 1px);
-  position: relative;
-  vertical-align: top;
-  background-color: #f5f5f5;
-  cursor: pointer;
-  outline: none;
+`
 
-  &:active {
-    background-color: #e8e8e8;
-    border-color: transparent;
-    color: #363636;
-  }
-
-  &:focus {
-    box-shadow: 0 0 0 0.125em rgba(245, 245, 245, 0.25);
-  }
-
-  &:hover {
-    background-color: #eee;
-    border-color: transparent;
-    color: #363636;
-  }
+const StyledH3 = styled.h3`
+  margin-top: 1rem;
 `
 
 const SubmitButtonWrapper = styled.div`
@@ -145,52 +97,52 @@ const SubmitButtonWrapper = styled.div`
   margin: 2rem auto auto;
 `
 
-const Button = props => {
-  return (
-    <StyledButton type="button" {...props}>
-      {props.children}
-    </StyledButton>
-  )
-}
+const ZoomIn = keyframes`
+    from {
+      transform: scale3d(.3, .3, .3);
+    }
+`
+
+const StyledModal = Modal.styled`
+  border-radius: 0.625rem;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  position: relative;
+`
+
+const AnimatedModal = styled(StyledModal)<{ isOpen: boolean }>`
+  animation-name: ${ZoomIn};
+  animation-timing-function: cubic-bezier(0.4, 0, 0, 1.5);
+  animation-duration: 0.3s;
+  animation-delay: 0s;
+`
 
 export const Form = (props: Props) => {
+  const [isShowing, setIsShowing] = useState(false)
+  const [fields, setFields] = useState({})
   const [personType, setIsPersonType] = useState<PersonType | undefined>(
     undefined
   )
-  const [fields, setFields] = useState({})
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFields({
-      ...fields,
-      [e.target.name]: e.target.value,
-    })
+    updateFields({ [e.target.name]: e.target.value })
   }
 
-  const onSalaryChange = (values: [number, number]) => {
-    setFields({
-      ...fields,
-      salary: values,
-    })
+  const onSliderChange = (name: string) => (values: [number, number]) => {
+    updateFields({ [name]: values })
   }
 
-  const onBudgetChange = (values: [number, number]) => {
-    setFields({
-      ...fields,
-      budget: values,
-    })
-  }
-
-  const onTimelineChange = (values: [number, number]) => {
-    setFields({
-      ...fields,
-      timeline: values,
-    })
+  const updateFields = (value: { [key: string]: any }) => {
+    setFields({ ...fields, ...value })
   }
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    console.log(fields, "fields")
     e.preventDefault()
     const form = e.target
     fetch("/", {
@@ -202,8 +154,16 @@ export const Form = (props: Props) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       method: "POST",
     })
-      .then(() => alert("form submitted"))
+      .then(() => handleSuccessfulSubmit(form))
       .catch(error => alert(error))
+  }
+
+  const handleSuccessfulSubmit = (form: HTMLFormElement) => {
+    form.reset()
+
+    setIsShowing(true)
+    setIsPersonType(undefined)
+    setFields({})
   }
 
   const renderJobForm = () => {
@@ -212,7 +172,7 @@ export const Form = (props: Props) => {
         <h3>Interesting Job Description</h3>
         <InputWrapper>
           <label>Company Name</label>
-          <StyledInput
+          <TextInput
             required={true}
             type="text"
             name="company"
@@ -221,8 +181,8 @@ export const Form = (props: Props) => {
         </InputWrapper>
         <InputWrapper>
           <label>Location</label>
-          <StyledInput
-            placeholder={'You can put "Remote" here'}
+          <TextInput
+            placeholder={'You can put "Remote" here if need be'}
             required={true}
             type="text"
             name="location"
@@ -231,7 +191,7 @@ export const Form = (props: Props) => {
         </InputWrapper>
         <InputWrapper>
           <label>Job Title</label>
-          <StyledInput
+          <TextInput
             required={true}
             type="text"
             name="location"
@@ -240,26 +200,26 @@ export const Form = (props: Props) => {
         </InputWrapper>
         <SalarySlider>
           <SliderLabel>Salary</SliderLabel>
-          <Range
+          <RangeWithTooltip
             allowCross={false}
             min={100}
-            max={200}
+            max={300}
             defaultValue={DEFAULT_SALARY_RANGE}
-            tipFormatter={(value: string) => `$${value}k`}
+            tipFormatter={(value: number) => `$${value}k`}
             tipProps={{ visible: true }}
             step={5}
-            onChange={onSalaryChange}
+            onChange={onSliderChange("salary")}
           />
         </SalarySlider>
         <InputWrapper>
           <label> What is the gig all about?</label>
-          <StyledTextArea
+          <TextArea
             placeholder={
               "Describe the company culture, some of the daily tasks, benefits and such. Please avoid copypasta :)"
             }
             name={`${personType}-message`}
             onChange={handleChange}
-            rows={"10"}
+            rows={10}
           />
         </InputWrapper>
       </>
@@ -272,46 +232,44 @@ export const Form = (props: Props) => {
         <h3>Let's Do Something Cool!</h3>
         <SliderWrapper>
           <SliderLabel>Timeline</SliderLabel>
-          <Range
-            defaultValue={[3, 6]}
+          <RangeWithTooltip
+            defaultValue={DEFAULT_TIMELINE_RANGE}
             max={36}
-            tipFormatter={(value: string) => `${value} months`}
+            tipFormatter={(value: number) => `${value} months`}
             tipProps={{ visible: true }}
-            onChange={onTimelineChange}
+            onChange={onSliderChange("timeline")}
           />
         </SliderWrapper>
         <SliderWrapper>
           <SliderLabel>Budget</SliderLabel>
-          <Range
+          <RangeWithTooltip
             allowCross={false}
             min={5}
             max={995}
-            defaultValue={[25, 100]}
-            tipFormatter={(value: string) => `$${value}k`}
+            defaultValue={DEFAULT_BUDGET_RANGE}
+            tipFormatter={(value: number) => `$${value}k`}
             tipProps={{ visible: true }}
             step={10}
-            onChange={onBudgetChange}
+            onChange={onSliderChange("budget")}
           />
         </SliderWrapper>
         <InputWrapper>
           <label> What will we be doing?</label>
-          <StyledTextArea
+          <TextArea
             placeholder={
               "A nice introduction about you or your business and the project"
             }
             name={`${personType}-message`}
             onChange={handleChange}
-            rows={"10"}
+            rows={10}
           />
         </InputWrapper>
       </>
     )
   }
 
-  // About you
-
   return (
-    <Layout location={props.location} title={"Contact"}>
+    <Layout location={props.location} title={"Inquiries"}>
       <h3>About You</h3>
       <form
         name="contact"
@@ -333,7 +291,7 @@ export const Form = (props: Props) => {
           <LeftBaseFormContainer>
             <InputWrapper>
               <label>Your Name</label>
-              <StyledInput
+              <TextInput
                 required={true}
                 type="text"
                 name="name"
@@ -342,7 +300,7 @@ export const Form = (props: Props) => {
             </InputWrapper>
             <InputWrapper>
               <label>Email</label>
-              <StyledInput
+              <TextInput
                 required={true}
                 type="email"
                 name="email"
@@ -351,7 +309,7 @@ export const Form = (props: Props) => {
             </InputWrapper>
             <InputWrapper>
               <label>Phone</label>
-              <StyledInput
+              <TextInput
                 required={true}
                 type="text"
                 name="phone"
@@ -379,6 +337,16 @@ export const Form = (props: Props) => {
           </SubmitButtonWrapper>
         )}
       </form>
+      <AnimatedModal
+        onBackgroundClick={() => setIsShowing(false)}
+        onEscapeKeydown={() => setIsShowing(false)}
+        isOpen={isShowing}
+        allowScroll={false}
+      >
+        <StyledH3>Thanks!</StyledH3>
+        <p>I look forward to speaking with you!</p>
+        <CloseButton onClick={() => setIsShowing(false)}>x</CloseButton>
+      </AnimatedModal>
     </Layout>
   )
 }
