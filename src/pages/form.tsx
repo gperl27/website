@@ -269,7 +269,7 @@ export const Form = (props: Props) => {
   }
 
   return (
-    <Layout location={props.location} title={"Inquiries"}>
+    <Layout location={props.location} title={"Greg Perlman"}>
       <h3>About You</h3>
       <form
         name="contact"
@@ -290,7 +290,7 @@ export const Form = (props: Props) => {
         <BaseFormContainer>
           <LeftBaseFormContainer>
             <InputWrapper>
-              <label>Your Name</label>
+              <label>Name</label>
               <TextInput
                 required={true}
                 type="text"
@@ -310,7 +310,6 @@ export const Form = (props: Props) => {
             <InputWrapper>
               <label>Phone</label>
               <TextInput
-                required={true}
                 type="text"
                 name="phone"
                 onChange={handleChange}
