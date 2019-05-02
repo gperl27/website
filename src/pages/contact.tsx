@@ -9,6 +9,7 @@ import { Button } from "../components/common/Button"
 import { TextArea } from "../components/common/TextArea"
 import { TextInput } from "../components/common/TextInput"
 import { Layout } from "../components/layout"
+import { rhythm, styledScale } from "../utils/typography"
 
 const RangeWithTooltip = createSliderWithTooltip(Range)
 
@@ -45,10 +46,11 @@ const LeftBaseFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-right: 1rem;
+  padding-right: ${rhythm(1)};
 
   @media (max-width: 991px) {
     padding: initial;
+    margin-bottom: ${rhythm(2)};
   }
 `
 
@@ -56,8 +58,9 @@ const RightBaseFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 1rem;
+  padding-left: ${rhythm(1)};
   text-align: center;
+  justify-content: center;
 
   @media (max-width: 991px) {
     padding: initial;
@@ -70,36 +73,43 @@ const AboutButtons = styled.div`
 `
 
 const SliderWrapper = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: ${rhythm(1)};
 `
 
 const SliderLabel = styled.p`
-  margin-bottom: 3rem;
+  margin-bottom: ${rhythm(2)};
 `
 
 const SalarySlider = styled(SliderWrapper)`
-  margin-top: 1rem;
+  margin-top: ${rhythm(1)};
 `
 
 const CloseButton = styled.div`
   position: absolute;
-  left: 1rem;
-  top: 0.5rem;
-  font-size: 1rem;
-`
-
-const StyledH3 = styled.h3`
-  margin-top: 1rem;
+  left: ${rhythm(1)};
+  top: ${rhythm(0.5)};
+  cursor: pointer;
 `
 
 const SubmitButtonWrapper = styled.div`
   text-align: center;
-  margin: 2rem auto auto;
+  margin-bottom: ${rhythm(2.5)};
+`
+
+const StyledSubmitButton = styled(Button)`
+  padding-left: ${rhythm(1.2)};
+  padding-right: ${rhythm(1.2)};
+  ${styledScale(0.5)};
 `
 
 const Caption = styled.span`
-  font-size: 0.85rem;
+  font-size: ${rhythm(0.5)};
   color: #666666;
+`
+
+const PersonFormContainer = styled.div`
+  padding-top: ${rhythm(2.5)};
+  padding-bottom: ${rhythm(2.5)};
 `
 
 const ZoomIn = keyframes`
@@ -109,8 +119,8 @@ const ZoomIn = keyframes`
 `
 
 const StyledModal = Modal.styled`
-  border-radius: 0.625rem;
-  padding: 2rem;
+  border-radius: ${rhythm(0.625)};
+  padding: ${rhythm(3)};
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -126,7 +136,7 @@ const AnimatedModal = styled(StyledModal)<{ isOpen: boolean }>`
   animation-delay: 0s;
 `
 
-export const Form = (props: Props) => {
+export const Contact = (props: Props) => {
   const [isShowing, setIsShowing] = useState(false)
   const [fields, setFields] = useState({})
   const [personType, setIsPersonType] = useState<PersonType | undefined>(
@@ -187,7 +197,7 @@ export const Form = (props: Props) => {
 
   const renderJobForm = () => {
     return (
-      <>
+      <PersonFormContainer>
         <h3>Interesting Job Description</h3>
         <InputWrapper>
           <label>Company Name</label>
@@ -203,7 +213,6 @@ export const Form = (props: Props) => {
             Location <Caption>- You can put "Remote" here if need be</Caption>
           </label>
           <TextInput
-            // placeholder={'You can put "Remote" here if need be'}
             required={true}
             type="text"
             name="location"
@@ -243,13 +252,13 @@ export const Form = (props: Props) => {
             rows={10}
           />
         </InputWrapper>
-      </>
+      </PersonFormContainer>
     )
   }
 
   const renderInquiryForm = () => {
     return (
-      <>
+      <PersonFormContainer>
         <h3>Let's Do Something Cool!</h3>
         <SliderWrapper>
           <SliderLabel>Timeline</SliderLabel>
@@ -285,7 +294,7 @@ export const Form = (props: Props) => {
             rows={10}
           />
         </InputWrapper>
-      </>
+      </PersonFormContainer>
     )
   }
 
@@ -350,7 +359,7 @@ export const Form = (props: Props) => {
         {personType === "entrepreneur" && renderInquiryForm()}
         {personType && (
           <SubmitButtonWrapper>
-            <Button type="submit">Send</Button>
+            <StyledSubmitButton type="submit">Send</StyledSubmitButton>
           </SubmitButtonWrapper>
         )}
       </form>
@@ -360,7 +369,7 @@ export const Form = (props: Props) => {
         isOpen={isShowing}
         allowScroll={false}
       >
-        <StyledH3>Thanks!</StyledH3>
+        <h3>Thanks!</h3>
         <p>I look forward to speaking with you!</p>
         <CloseButton onClick={() => setIsShowing(false)}>x</CloseButton>
       </AnimatedModal>
@@ -368,4 +377,4 @@ export const Form = (props: Props) => {
   )
 }
 
-export default Form
+export default Contact

@@ -13,7 +13,9 @@ const StyledLink = styled(FadeLink)`
 `
 
 const Title = styled.h3`
+  font-family: Montserrat, serif;
   margin-bottom: ${rhythm(1 / 4)};
+  margin-top: ${rhythm(2)};
 `
 
 type Props = PageRendererProps

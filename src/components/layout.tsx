@@ -9,15 +9,16 @@ interface Props extends PageRendererProps {
   children: ReactNode
 }
 
-const StyledH1 = styled.h1`
-  ${styledScale(1.5)};
+const MainHeading = styled.h1`
+  font-family: Montserrat, serif;
+  ${styledScale(1)};
   margin-bottom: ${rhythm(1.5)};
   margin-top: 0;
 `
 
-const StyledH3 = styled.h3`
-  font-family: Montserrat, sans-serif;
-  margin-top: 0;
+const SubHeading = styled.h2`
+  font-family: Montserrat, serif;
+  margin-bottom: ${rhythm(2)};
 `
 
 const StyledLink = styled(FadeLink)`
@@ -34,6 +35,7 @@ const Content = styled.div`
 `
 
 const StyledFooter = styled.footer`
+  margin-top: ${rhythm(4)};
   text-align: center;
 `
 
@@ -41,7 +43,7 @@ export const Layout = (props: Props) => {
   const { location, title, children } = props
   const rootPath = `/`
 
-  const HeaderTitle = location.pathname === rootPath ? StyledH1 : StyledH3
+  const HeaderTitle = location.pathname === rootPath ? MainHeading : SubHeading
 
   return (
     <Content>
@@ -52,7 +54,7 @@ export const Layout = (props: Props) => {
       </header>
       <main>{children}</main>
       <StyledFooter>
-        <FadeLink to={`/form`}>inquiries</FadeLink>
+        <FadeLink to={`/contact`}>inquiries</FadeLink>
       </StyledFooter>
     </Content>
   )

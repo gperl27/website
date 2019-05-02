@@ -32,6 +32,10 @@ const PostNavigator = styled.ul`
   padding: 0;
 `
 
+const Heading = styled.h1`
+  font-family: Montserrat, serif;
+`
+
 const BlogPostTemplate = (props: Props) => {
   const data = props.data!
   const post = data.markdownRemark!
@@ -47,7 +51,7 @@ const BlogPostTemplate = (props: Props) => {
         title={frontmatter.title!}
         description={frontmatter.description || excerpt}
       />
-      <h1>{post.frontmatter!.title}</h1>
+      <Heading>{post.frontmatter!.title}</Heading>
       <Date>{frontmatter.date}</Date>
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <Divider />
