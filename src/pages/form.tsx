@@ -1,5 +1,6 @@
 import { PageRendererProps } from "gatsby"
 import React, { ChangeEvent, useState } from "react"
+import styled from "styled-components"
 import { Layout } from "../components/layout"
 
 type Props = PageRendererProps
@@ -10,7 +11,46 @@ const encode = (data: { [key: string]: any }) => {
     .join("&")
 }
 
+const StyledInput = styled.input`
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  border-radius: 4px;
+  background-color: #fff;
+  appearance: none;
+  align-items: center;
+  border: 1px solid #dbdbdb;
+  display: inline-flex;
+  height: 2.25em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding: calc(0.375em - 1px) calc(0.625em - 1px);
+  position: relative;
+  vertical-align: top;
+  max-width: 100%;
+  width: 100%;
+  outline: 0;
+  font-size: 1.2rem;
+
+  &:hover {
+    border-color: #b5b5b5;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+    border-color: #3273dc;
+  }
+`
+
+const InputWrapper = styled.div`
+  box-sizing: border-box;
+  clear: both;
+  font-size: 1rem;
+  position: relative;
+  text-align: left;
+`
+
 export const Form = (props: Props) => {
+  const [isRecruiter, setIsRecruiter] = useState(false)
   const [fields, setFields] = useState({})
 
   const handleChange = (
@@ -34,9 +74,15 @@ export const Form = (props: Props) => {
       .catch(error => alert(error))
   }
 
+  const SalaryInput = props => (
+    <InputMask {...props} mask="+4\9 99 999 99" maskChar=" " />
+  )
+
   return (
     <Layout location={props.location} title={"Contact"}>
-      <h1>Contact</h1>
+      <h3>You are: </h3>
+      <button onClick={() => setIsRecruiter(true)}>Recruiter</button>
+      <button onClick={() => setIsRecruiter(false)}>Entrepreneur</button>
       <form
         name="contact"
         method="post"
@@ -50,26 +96,31 @@ export const Form = (props: Props) => {
         <p hidden={true}>
           <label>
             Don’t fill this out:{" "}
-            <input name="bot-field" onChange={handleChange} />
+            <input required={true} name="bot-field" onChange={handleChange} />
           </label>
         </p>
+
+        <InputWrapper>
+          <label>Name</label>
+          <StyledInput
+            required={true}
+            type="text"
+            name="name"
+            onChange={handleChange}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <label>Email</label>
+          <StyledInput
+            required={true}
+            type="email"
+            name="email"
+            onChange={handleChange}
+          />
+        </InputWrapper>
         <p>
           <label>
-            Your name:
-            <br />
-            <input type="text" name="name" onChange={handleChange} />
-          </label>
-        </p>
-        <p>
-          <label>
-            Your email:
-            <br />
-            <input type="email" name="email" onChange={handleChange} />
-          </label>
-        </p>
-        <p>
-          <label>
-            Message:
+            Description:
             <br />
             <textarea name="message" onChange={handleChange} />
           </label>
