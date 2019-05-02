@@ -166,6 +166,20 @@ export const Form = (props: Props) => {
     setFields({})
   }
 
+  const renderHiddenInputsForStaticRendering = () => {
+    return (
+      <>
+        <input type="hidden" name="salary" />
+        <input type="hidden" name="budget" />
+        <input type="hidden" name="timeline" />
+        <input type="hidden" name="company" />
+        <input type="hidden" name="location" />
+        <input type="hidden" name="recruiter-message" />
+        <input type="hidden" name="entrepreneur-message" />
+      </>
+    )
+  }
+
   const renderJobForm = () => {
     return (
       <>
@@ -281,6 +295,7 @@ export const Form = (props: Props) => {
       >
         {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
         <input type="hidden" name="form-name" value="contact" />
+        {renderHiddenInputsForStaticRendering()}
         <p hidden={true}>
           <label>
             Don’t fill this out:{" "}
