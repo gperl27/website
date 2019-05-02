@@ -13,7 +13,7 @@ import { Layout } from "../components/layout"
 const RangeWithTooltip = createSliderWithTooltip(Range)
 
 const DEFAULT_SALARY_RANGE = [140, 250]
-const DEFAULT_TIMELINE_RANGE = [3, 6]
+const DEFAULT_TIMELINE_RANGE = [3, 12]
 const DEFAULT_BUDGET_RANGE = [25, 100]
 
 type Props = PageRendererProps
@@ -95,6 +95,11 @@ const StyledH3 = styled.h3`
 const SubmitButtonWrapper = styled.div`
   text-align: center;
   margin: 2rem auto auto;
+`
+
+const Caption = styled.span`
+  font-size: 0.85rem;
+  color: #666666;
 `
 
 const ZoomIn = keyframes`
@@ -194,9 +199,11 @@ export const Form = (props: Props) => {
           />
         </InputWrapper>
         <InputWrapper>
-          <label>Location</label>
+          <label>
+            Location <Caption>- You can put "Remote" here if need be</Caption>
+          </label>
           <TextInput
-            placeholder={'You can put "Remote" here if need be'}
+            // placeholder={'You can put "Remote" here if need be'}
             required={true}
             type="text"
             name="location"
