@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { Layout } from "../components/layout"
 import { SEO } from "../components/seo"
 import { Query, SitePageContext } from "../graphql-types"
-import { rhythm, styledScale } from "../utils/typography"
+import { rhythm } from "../utils/typography"
 
 const Title = styled.h3`
   font-family: Montserrat, serif;
