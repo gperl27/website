@@ -45,6 +45,8 @@ const BlogPostTemplate = (props: Props) => {
   const siteTitle = data.site!.siteMetadata!.title!
   const { previous, next } = props.pageContext
 
+  console.log(previous, next)
+
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO

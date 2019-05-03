@@ -18,6 +18,7 @@ export const createPages: GatsbyCreatePages = async ({
   const allMarkdown = await graphql(`
     {
       allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/content/blog/" } }
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
       ) {
@@ -43,8 +44,8 @@ export const createPages: GatsbyCreatePages = async ({
   const posts = allMarkdown.data.allMarkdownRemark.edges
 
   posts.forEach((post: Post, index: number) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node
-    const next = index === 0 ? null : posts[index - 1].node
+    const next = index === posts.length - 1 ? null : posts[index + 1].node
+    const previous = index === 0 ? null : posts[index - 1].node
 
     createPage({
       path: post.node.fields.slug,
