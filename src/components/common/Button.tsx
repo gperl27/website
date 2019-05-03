@@ -1,40 +1,37 @@
 import React, { ButtonHTMLAttributes } from "react"
 import styled from "styled-components"
+import { rhythm, styledScale } from "../../utils/typography"
 
 type ButtonProps = Partial<ButtonHTMLAttributes<HTMLButtonElement>>
 
 const StyledButton = styled.button`
+  ${styledScale(0.25)};
   appearance: none;
   align-items: center;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  border: ${rhythm(0.2)} solid transparent;
+  border-radius: ${rhythm(0.15)};
   box-shadow: none;
   display: inline-flex;
-  font-size: 1rem;
-  height: 2.25em;
   justify-content: flex-start;
-  line-height: 1.5;
-  padding: calc(0.375em - 1px) calc(0.625em - 1px);
+  padding-left: ${rhythm(1)};
+  padding-right: ${rhythm(1)};
+  padding-top: ${rhythm(0.2)};
+  padding-bottom: ${rhythm(0.25)};
   position: relative;
-  vertical-align: top;
-  background-color: #f5f5f5;
   cursor: pointer;
   outline: none;
+  background: rgb(${props => props.theme.palette.mainBrand}, 0.9);
+  color: rgb(${props => props.theme.palette.lightShades});
 
+  &:focus,
   &:active {
-    background-color: #e8e8e8;
-    border-color: transparent;
-    color: #363636;
-  }
-
-  &:focus {
-    box-shadow: 0 0 0 0.125em rgba(245, 245, 245, 0.25);
+    background-color: rgba(${props => props.theme.palette.mainBrand}, 1);
+    box-shadow: 0 0 0 ${rhythm(0.1)}
+      rgba(${props => props.theme.palette.mainBrand}, 0.1);
   }
 
   &:hover {
-    background-color: #eee;
-    border-color: transparent;
-    color: #363636;
+    background-color: rgba(${props => props.theme.palette.mainBrand}, 1);
   }
 `
 export const Button = (props: ButtonProps) => {

@@ -12,14 +12,26 @@ interface Props extends PageRendererProps {
 
 const MainHeading = styled.h1`
   font-family: Montserrat, serif;
-  ${styledScale(1)};
+  ${styledScale(1.2)};
   margin-bottom: ${rhythm(1.5)};
   margin-top: 0;
+  color: rgb(${props => props.theme.palette.mainBrand});
+
+  @media (max-width: 771px) {
+    ${styledScale(0.75)};
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 467px) {
+    ${styledScale(0.5)};
+    margin-bottom: 0;
+  }
 `
 
 const SubHeading = styled.h2`
   font-family: Montserrat, serif;
   margin-bottom: ${rhythm(2)};
+  color: rgb(${props => props.theme.palette.mainBrand});
 `
 
 const StyledLink = styled(FadeLink)`
@@ -29,6 +41,7 @@ const StyledLink = styled(FadeLink)`
 `
 
 const Content = styled.div`
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   max-width: ${rhythm(24)};
@@ -38,6 +51,25 @@ const Content = styled.div`
 const StyledFooter = styled.footer`
   margin-top: ${rhythm(4)};
   text-align: center;
+`
+
+const ColorSwitchWrapper = styled.div`
+  position: absolute;
+  right: ${rhythm(-6)};
+  top: ${rhythm(2)};
+
+  @media (max-width: 991px) {
+    position: initial;
+  }
+`
+
+const StyledHeader = styled.header`
+  @media (max-width: 991px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: ${rhythm(1.5)};
+  }
 `
 
 export const Layout = (props: Props) => {
@@ -50,19 +82,21 @@ export const Layout = (props: Props) => {
 
   return (
     <Content>
-      <label>
-        <input
-          type="checkbox"
-          onChange={() => themeContext.toggleDark()}
-          checked={themeContext.isDark}
-        />{" "}
-        Dark mode
-      </label>
-      <header>
+      <StyledHeader>
         <HeaderTitle>
           <StyledLink to={`/`}>{title}</StyledLink>
         </HeaderTitle>
-      </header>
+        <ColorSwitchWrapper>
+          <label>
+            <input
+              type="checkbox"
+              onChange={() => themeContext.toggleDark()}
+              checked={themeContext.isDark}
+            />{" "}
+            Dark mode
+          </label>
+        </ColorSwitchWrapper>
+      </StyledHeader>
       <main>{children}</main>
       <StyledFooter>
         <FadeLink to={`/contact`}>inquiries</FadeLink>

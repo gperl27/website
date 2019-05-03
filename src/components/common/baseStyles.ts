@@ -1,30 +1,59 @@
 import { css } from "styled-components"
+import { rhythm, styledScale } from "../../utils/typography"
 
-export const baseInputStyles = css`
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  border-radius: 4px;
-  background-color: #fff;
-  appearance: none;
-  align-items: center;
-  border: 1px solid #dbdbdb;
-  display: inline-flex;
-  justify-content: flex-start;
-  line-height: 1.5;
-  padding: calc(0.375em - 1px) calc(0.625em - 1px);
-  position: relative;
-  vertical-align: top;
-  max-width: 100%;
-  width: 100%;
-  outline: 0;
-  font-size: 1.2rem;
+const darkStyles = css`
+  background-color: rgb(${props => props.theme.palette.lightShades});
+  box-shadow: inset 0 ${rhythm(0.1)} ${rhythm(0.2)}
+    rgba(${props => props.theme.palette.lightAccent}, 0.25);
+
+  border: ${rhythm(0.075)} solid
+    rgba(${props => props.theme.palette.mainBrand}, 0.65);
 
   &:hover {
-    border-color: #b5b5b5;
+    border-color: rgba(${props => props.theme.palette.mainBrand}, 1);
   }
 
   &:active,
   &:focus {
-    box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
-    border-color: #3273dc;
+    box-shadow: 0 0 ${rhythm(0.05)} ${rhythm(0.05)}
+      rgba(${props => props.theme.palette.mainBrand}, 1);
   }
+`
+
+const lightStyles = css`
+  box-shadow: inset 0 ${rhythm(0.1)} ${rhythm(0.2)}
+    rgba(${props => props.theme.palette.lightAccent}, 0.1);
+
+  border: ${rhythm(0.02)} solid
+    rgba(${props => props.theme.palette.lightAccent}, 0.35);
+
+  &:hover {
+    border-color: rgba(${props => props.theme.palette.lightAccent}, 0.625);
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: 0 0 0 ${rhythm(0.025)}
+      rgba(${props => props.theme.palette.darkAccent}, 0.625);
+  }
+`
+
+export const baseInputStyles = css`
+  ${styledScale(0.25)};
+  border-radius: ${rhythm(0.25)};
+  background-color: #fff;
+  appearance: none;
+  align-items: center;
+  display: inline-flex;
+  justify-content: flex-start;
+  padding-top: ${rhythm(0.5)};
+  padding-bottom: ${rhythm(0.5)};
+  padding-left: ${rhythm(0.325)};
+  padding-right: ${rhythm(0.325)};
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  outline: 0;
+
+  ${props => (props.theme.isDark ? darkStyles : lightStyles)};
 `

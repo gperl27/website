@@ -72,6 +72,14 @@ const AboutButtons = styled.div`
   justify-content: space-evenly;
 `
 
+const AboutButton = styled(Button)`
+  @media (min-width: 992px) {
+    ${styledScale(0.05)};
+    padding-left: ${rhythm(0.1)};
+    padding-right: ${rhythm(0.1)};
+  }
+`
+
 const SliderWrapper = styled.div`
   margin-bottom: ${rhythm(1)};
 `
@@ -84,10 +92,8 @@ const SalarySlider = styled(SliderWrapper)`
   margin-top: ${rhythm(1)};
 `
 
-const CloseButton = styled.div`
-  position: absolute;
-  left: ${rhythm(1)};
-  top: ${rhythm(0.5)};
+const CloseModalButton = styled(Button)`
+  margin-top: ${rhythm(1)};
   cursor: pointer;
 `
 
@@ -97,8 +103,8 @@ const SubmitButtonWrapper = styled.div`
 `
 
 const StyledSubmitButton = styled(Button)`
-  padding-left: ${rhythm(1.2)};
-  padding-right: ${rhythm(1.2)};
+  padding-left: ${rhythm(1.5)};
+  padding-right: ${rhythm(1.5)};
   ${styledScale(0.5)};
 `
 
@@ -119,7 +125,7 @@ const ZoomIn = keyframes`
 `
 
 const StyledModal = Modal.styled`
-  border-radius: ${rhythm(0.625)};
+  border-radius: ${rhythm(0.25)};
   padding: ${rhythm(3)};
   display: flex;
   align-items: center;
@@ -346,12 +352,12 @@ export const Contact = (props: Props) => {
           <RightBaseFormContainer>
             <h4>Choose One</h4>
             <AboutButtons>
-              <Button onClick={() => setIsPersonType("recruiter")}>
+              <AboutButton onClick={() => setIsPersonType("recruiter")}>
                 Recruiter
-              </Button>
-              <Button onClick={() => setIsPersonType("entrepreneur")}>
+              </AboutButton>
+              <AboutButton onClick={() => setIsPersonType("entrepreneur")}>
                 Entrepreneur
-              </Button>
+              </AboutButton>
             </AboutButtons>
           </RightBaseFormContainer>
         </BaseFormContainer>
@@ -371,7 +377,9 @@ export const Contact = (props: Props) => {
       >
         <h3>Thanks!</h3>
         <p>I look forward to speaking with you!</p>
-        <CloseButton onClick={() => setIsShowing(false)}>x</CloseButton>
+        <CloseModalButton onClick={() => setIsShowing(false)}>
+          Close
+        </CloseModalButton>
       </AnimatedModal>
     </Layout>
   )

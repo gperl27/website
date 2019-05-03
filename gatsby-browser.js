@@ -9,9 +9,6 @@ import { ThemeManagerProvider } from "./src/contexts/ThemeManager"
 import { StyledThemeProvider } from "./src/contexts/StyledThemeProvider"
 
 const StyledRoot = styled.div`
-  color: var(--textNormal);
-  background: var(--bg);
-  transition: color 0.2s ease-out, background 0.2s ease-out;
   height: 100%;
 `
 

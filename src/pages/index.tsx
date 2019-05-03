@@ -6,13 +6,14 @@ import { Layout } from "../components/layout"
 import { FadeLink } from "../components/link"
 import { SEO } from "../components/seo"
 import { MarkdownRemark } from "../graphql-types"
-import { rhythm } from "../utils/typography"
+import { rhythm, styledScale } from "../utils/typography"
 
 const StyledLink = styled(FadeLink)`
   box-shadow: none;
 `
 
 const Title = styled.h3`
+  ${styledScale(0.85)};
   font-family: Montserrat, serif;
   margin-bottom: ${rhythm(1 / 4)};
   margin-top: ${rhythm(2)};
