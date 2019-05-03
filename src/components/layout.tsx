@@ -1,6 +1,7 @@
 import { PageRendererProps } from "gatsby"
-import React, { ReactNode } from "react"
+import React, { ReactNode, useContext } from "react"
 import styled from "styled-components"
+import { ThemeManagerContext } from "../contexts/ThemeManager"
 import { rhythm, styledScale } from "../utils/typography"
 import { FadeLink } from "./link"
 
@@ -45,8 +46,18 @@ export const Layout = (props: Props) => {
 
   const HeaderTitle = location.pathname === rootPath ? MainHeading : SubHeading
 
+  const themeContext = useContext(ThemeManagerContext)
+
   return (
     <Content>
+      <label>
+        <input
+          type="checkbox"
+          onChange={() => themeContext.toggleDark()}
+          checked={themeContext.isDark}
+        />{" "}
+        Dark mode
+      </label>
       <header>
         <HeaderTitle>
           <StyledLink to={`/`}>{title}</StyledLink>
