@@ -31,7 +31,6 @@ const ThemeManagerProvider = (props: Props) => {
   }
 
   useEffect(() => {
-    // Getting dark mode value from localStorage!
     const localStorageTheme = localStorage.getItem("dark")
     const latestTheme = localStorageTheme && JSON.parse(localStorageTheme)
     if (latestTheme) {

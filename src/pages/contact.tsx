@@ -6,6 +6,7 @@ import React, { ChangeEvent, useState } from "react"
 import styled, { keyframes } from "styled-components"
 import Modal from "styled-react-modal"
 import { Button } from "../components/common/Button"
+import { Caption } from "../components/common/Caption"
 import { TextArea } from "../components/common/TextArea"
 import { TextInput } from "../components/common/TextInput"
 import { Layout } from "../components/layout"
@@ -106,11 +107,6 @@ const StyledSubmitButton = styled(Button)`
   padding-left: ${rhythm(1.5)};
   padding-right: ${rhythm(1.5)};
   ${styledScale(0.5)};
-`
-
-const Caption = styled.span`
-  font-size: ${rhythm(0.5)};
-  color: #666666;
 `
 
 const PersonFormContainer = styled.div`

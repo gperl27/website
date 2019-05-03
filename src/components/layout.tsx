@@ -3,6 +3,7 @@ import React, { ReactNode, useContext } from "react"
 import styled from "styled-components"
 import { ThemeManagerContext } from "../contexts/ThemeManager"
 import { rhythm, styledScale } from "../utils/typography"
+import { Footer } from "./footer"
 import { FadeLink } from "./link"
 
 interface Props extends PageRendererProps {
@@ -46,11 +47,6 @@ const Content = styled.div`
   margin-right: auto;
   max-width: ${rhythm(24)};
   padding: ${`${rhythm(1.5)} ${rhythm(3 / 4)}`};
-`
-
-const StyledFooter = styled.footer`
-  margin-top: ${rhythm(4)};
-  text-align: center;
 `
 
 const ColorSwitchWrapper = styled.div`
@@ -98,9 +94,7 @@ export const Layout = (props: Props) => {
         </ColorSwitchWrapper>
       </StyledHeader>
       <main>{children}</main>
-      <StyledFooter>
-        <FadeLink to={`/contact`}>inquiries</FadeLink>
-      </StyledFooter>
+      <Footer />
     </Content>
   )
 }
