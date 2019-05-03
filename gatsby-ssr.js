@@ -1,8 +1,8 @@
-import { ModalProvider } from "styled-react-modal"
 import React from "react"
+import { ProviderWrapper } from "./src/contexts/ProviderWrapper"
 
 export const wrapRootElement = ({ element }) => (
-  <ModalProvider>
+  <ProviderWrapper>
     {element}
-  </ModalProvider>
+  </ProviderWrapper>
 )

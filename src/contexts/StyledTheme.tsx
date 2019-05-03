@@ -116,7 +116,7 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 
 type ThemeState = Theme & { isDark: boolean }
 
-const StyledThemeProvider = (props: Props) => {
+export const StyledTheme = (props: Props) => {
   const themeManagerContext = useContext(ThemeManagerContext)
 
   const isDark = themeManagerContext.isDark
@@ -132,5 +132,3 @@ const StyledThemeProvider = (props: Props) => {
     </ThemeProvider>
   )
 }
-
-export { StyledThemeProvider }
