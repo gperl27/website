@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
 import { ModalProvider } from "styled-react-modal"
-import { StyledTheme } from "./StyledTheme"
+import { StyledThemeProvider } from "./StyledThemeProvider"
 import { ThemeManagerProvider } from "./ThemeManager"
 
 const StyledRoot = styled.div`
@@ -15,9 +15,9 @@ interface Props {
 export const ProviderWrapper = (props: Props) => (
   <StyledRoot>
     <ThemeManagerProvider>
-      <StyledTheme>
+      <StyledThemeProvider>
         <ModalProvider>{props.children}</ModalProvider>
-      </StyledTheme>
+      </StyledThemeProvider>
     </ThemeManagerProvider>
   </StyledRoot>
 )

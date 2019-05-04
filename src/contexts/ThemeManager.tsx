@@ -18,7 +18,6 @@ const defaultState: ThemeManager = {
 export const ThemeManagerContext = createContext<ThemeManager>(defaultState)
 
 const supportsDarkMode = () =>
-  // You need macOS Mojave + Safari Technology Preview Release 68 to test this currently.
   window.matchMedia("(prefers-color-scheme: dark)").matches
 
 const ThemeManagerProvider = (props: Props) => {

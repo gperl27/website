@@ -10,6 +10,7 @@ import Image from "gatsby-image"
 import React, { ComponentProps, forwardRef, Ref } from "react"
 import styled from "styled-components"
 import { rhythm } from "../utils/typography"
+import { FadeLink } from "./link"
 
 const Content = styled.div`
   display: flex;
@@ -43,14 +44,14 @@ export const Bio = () => {
         siteMetadata {
           author
           social {
-            twitter
+            github
           }
         }
       }
     }
   `)
 
-  const { author, social } = data.site.siteMetadata
+  const { author } = data.site.siteMetadata
 
   return (
     <Content>
@@ -60,12 +61,12 @@ export const Bio = () => {
         imgStyle={{ borderRadius: "50%" }}
       />
       <p>
-        Written by <strong>{author}</strong> who lives and works in San
-        Francisco building useful things.
+        A personal web-space by
         {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>
-          You should follow him on Twitter
-        </a>
+        <FadeLink to={"/about"}>
+          <strong>{author}</strong>.{` `}
+        </FadeLink>
+        I apply pressure to keys on a keyboard.
       </p>
     </Content>
   )
