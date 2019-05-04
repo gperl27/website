@@ -1,5 +1,4 @@
 import { PageRendererProps } from "gatsby"
-import { createSliderWithTooltip, Range } from "rc-slider"
 // tslint:disable-next-line:no-submodule-imports
 import "rc-slider/assets/index.css"
 import React, { ChangeEvent, useState } from "react"
@@ -7,12 +6,11 @@ import styled, { keyframes } from "styled-components"
 import Modal from "styled-react-modal"
 import { Button } from "../components/common/Button"
 import { Caption } from "../components/common/Caption"
+import { RangeSlider } from "../components/common/Slider"
 import { TextArea } from "../components/common/TextArea"
 import { TextInput } from "../components/common/TextInput"
 import { Layout } from "../components/layout"
 import { rhythm, styledScale } from "../utils/typography"
-
-const RangeWithTooltip = createSliderWithTooltip(Range)
 
 const DEFAULT_SALARY_RANGE = [140, 250]
 const DEFAULT_TIMELINE_RANGE = [3, 12]
@@ -78,6 +76,12 @@ const AboutButton = styled(Button)`
     ${styledScale(0.05)};
     padding-left: ${rhythm(0.1)};
     padding-right: ${rhythm(0.1)};
+  }
+
+  @media (max-width: 467px) {
+    ${styledScale(0.04)};
+    padding-left: ${rhythm(0.5)};
+    padding-right: ${rhythm(0.5)};
   }
 `
 
@@ -232,7 +236,7 @@ export const Contact = (props: Props) => {
         </InputWrapper>
         <SalarySlider>
           <SliderLabel>Salary</SliderLabel>
-          <RangeWithTooltip
+          <RangeSlider
             allowCross={false}
             min={100}
             max={300}
@@ -264,7 +268,7 @@ export const Contact = (props: Props) => {
         <h3>Let's Do Something Cool!</h3>
         <SliderWrapper>
           <SliderLabel>Timeline</SliderLabel>
-          <RangeWithTooltip
+          <RangeSlider
             defaultValue={DEFAULT_TIMELINE_RANGE}
             max={36}
             tipFormatter={(value: number) => `${value} months`}
@@ -274,7 +278,7 @@ export const Contact = (props: Props) => {
         </SliderWrapper>
         <SliderWrapper>
           <SliderLabel>Budget</SliderLabel>
-          <RangeWithTooltip
+          <RangeSlider
             allowCross={false}
             min={5}
             max={995}

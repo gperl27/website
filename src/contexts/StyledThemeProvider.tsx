@@ -4,6 +4,10 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "styled-components"
+import {
+  rcSliderTooltipArrowStyles,
+  rcSliderTooltipStyles,
+} from "../components/common/baseStyles"
 import { ThemeManagerContext } from "./ThemeManager"
 
 interface Theme extends DefaultTheme {
@@ -107,14 +111,22 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     color: rgb(${props => props.theme.global.linkHover});
   }
   
-  
   blockquote {
     color: inherit;
     border-left-color: inherit;
   }
+  
+  // rc-slider doesn't expose a nice way to change its tooltip styles
+  .rc-slider-tooltip-inner {
+     ${rcSliderTooltipStyles};
+  }
+  
+  .rc-slider-tooltip-arrow {
+    ${rcSliderTooltipArrowStyles};
+  }
 `
 
-type ThemeState = Theme & { isDark: boolean }
+export type ThemeState = Theme & { isDark: boolean }
 
 export const StyledThemeProvider = (props: Props) => {
   const themeManagerContext = useContext(ThemeManagerContext)

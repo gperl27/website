@@ -1,7 +1,7 @@
 import { css } from "styled-components"
 import { rhythm, styledScale } from "../../utils/typography"
 
-const darkStyles = css`
+const darkInputStyles = css`
   background-color: rgb(${props => props.theme.palette.lightShades});
   box-shadow: inset 0 ${rhythm(0.1)} ${rhythm(0.2)}
     rgba(${props => props.theme.palette.lightAccent}, 0.25);
@@ -20,7 +20,7 @@ const darkStyles = css`
   }
 `
 
-const lightStyles = css`
+const lightInputStyles = css`
   box-shadow: inset 0 ${rhythm(0.1)} ${rhythm(0.2)}
     rgba(${props => props.theme.palette.lightAccent}, 0.1);
 
@@ -55,5 +55,39 @@ export const baseInputStyles = css`
   width: 100%;
   outline: 0;
 
-  ${props => (props.theme.isDark ? darkStyles : lightStyles)};
+  ${props => (props.theme.isDark ? darkInputStyles : lightInputStyles)};
+`
+
+const lightSliderTooltipStyles = css`
+  color: rgb(${props => props.theme.palette.lightShades}) !important;
+  background-color: rgb(${props => props.theme.palette.lightAccent}) !important;
+  border-color: rgb(${props => props.theme.palette.lightAccent}) !important;
+  box-shadow: 0 0 4px rgb(${props => props.theme.palette.lightAccent}) !important;
+`
+
+const darkSliderTooltipStyles = css`
+  color: rgb(${props => props.theme.palette.darkShades}) !important;
+  background-color: rgb(${props => props.theme.palette.darkAccent}) !important;
+  border-color: rgb(${props => props.theme.palette.darkAccent}) !important;
+  box-shadow: 0 0 4px rgb(${props => props.theme.palette.darkAccent}) !important;
+`
+
+const lightSliderTooltipArrowStyles = css`
+  border-top-color: rgb(${props => props.theme.palette.lightAccent}) !important;
+`
+
+const darkSliderTooltipArrowStyles = css`
+  border-top-color: rgb(${props => props.theme.palette.darkAccent}) !important;
+`
+
+export const rcSliderTooltipStyles = css`
+  ${props =>
+    props.theme.isDark ? darkSliderTooltipStyles : lightSliderTooltipStyles};
+`
+
+export const rcSliderTooltipArrowStyles = css`
+  ${props =>
+    props.theme.isDark
+      ? darkSliderTooltipArrowStyles
+      : lightSliderTooltipArrowStyles};
 `
