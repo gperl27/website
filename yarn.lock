@@ -5749,6 +5749,11 @@ gatsby-source-filesystem@^2.0.32:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
+gatsby-styled-components-dark-mode@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-styled-components-dark-mode/-/gatsby-styled-components-dark-mode-1.0.1.tgz#29ba126c27b1c9d8d158ae59a9efbc90facc5024"
+  integrity sha512-MWt7eBHxgxb/Of27EK703ST37L65xNTIIavVoZEB8OhAHlGxxwYewSQC3VWUH5mSaiB8I8Nfk88JgzggMaUR+A==
+
 gatsby-telemetry@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.0.9.tgz#f9192d5bf72fb239d477e9b556a7dc040c4a566b"

@@ -87,7 +87,7 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-transition-link`,
     {
-      resolve: "gatsby-styled-components-theme-manager",
+      resolve: "gatsby-styled-components-dark-mode",
       options: {
         light: require(`${__dirname}/src/utils/theme.ts`).lightTheme,
         dark: require(`${__dirname}/src/utils/theme.ts`).darkTheme,
