@@ -1,7 +1,7 @@
 import { PageRendererProps } from "gatsby"
+import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import React, { ReactNode, useContext } from "react"
 import styled, { withTheme } from "styled-components"
-import { ThemeManagerContext } from "../../plugins/gatsby-styled-components-theme-manager"
 import { GlobalStyle, Theme } from "../utils/theme"
 import { rhythm, styledScale } from "../utils/typography"
 import { Footer } from "./footer"
