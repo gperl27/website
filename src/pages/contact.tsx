@@ -2,10 +2,10 @@ import { PageRendererProps } from "gatsby"
 // tslint:disable-next-line:no-submodule-imports
 import "rc-slider/assets/index.css"
 import React, { ChangeEvent, useState } from "react"
-import styled, { keyframes } from "styled-components"
-import Modal from "styled-react-modal"
+import styled from "styled-components"
 import { Button } from "../components/common/Button"
 import { Caption } from "../components/common/Caption"
+import { AppModal } from "../components/common/Modals"
 import { RangeSlider } from "../components/common/Slider"
 import { TextArea } from "../components/common/TextArea"
 import { TextInput } from "../components/common/TextInput"
@@ -116,30 +116,6 @@ const StyledSubmitButton = styled(Button)`
 const PersonFormContainer = styled.div`
   padding-top: ${rhythm(2.5)};
   padding-bottom: ${rhythm(2.5)};
-`
-
-const ZoomIn = keyframes`
-    from {
-      transform: scale3d(.3, .3, .3);
-    }
-`
-
-const StyledModal = Modal.styled`
-  border-radius: ${rhythm(0.25)};
-  padding: ${rhythm(3)};
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background: white;
-  position: relative;
-`
-
-const AnimatedModal = styled(StyledModal)<{ isOpen: boolean }>`
-  animation-name: ${ZoomIn};
-  animation-timing-function: cubic-bezier(0.4, 0, 0, 1.5);
-  animation-duration: 0.3s;
-  animation-delay: 0s;
 `
 
 export const Contact = (props: Props) => {
@@ -369,7 +345,7 @@ export const Contact = (props: Props) => {
           </SubmitButtonWrapper>
         )}
       </form>
-      <AnimatedModal
+      <AppModal
         onBackgroundClick={() => setIsShowing(false)}
         onEscapeKeydown={() => setIsShowing(false)}
         isOpen={isShowing}
@@ -380,7 +356,7 @@ export const Contact = (props: Props) => {
         <CloseModalButton onClick={() => setIsShowing(false)}>
           Close
         </CloseModalButton>
-      </AnimatedModal>
+      </AppModal>
     </Layout>
   )
 }

@@ -1,26 +1,17 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react"
+import React from "react"
+import { createContext, useEffect, useState } from "react"
 
-interface Props {
-  children: ReactNode
-}
-
-interface ThemeManager {
-  isDark: boolean
-
-  toggleDark(): void
-}
-
-const defaultState: ThemeManager = {
+const defaultState = {
   isDark: false,
   toggleDark: () => undefined,
 }
 
-export const ThemeManagerContext = createContext<ThemeManager>(defaultState)
+export const ThemeManagerContext = createContext(defaultState)
 
 const supportsDarkMode = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches
 
-const ThemeManagerProvider = (props: Props) => {
+export const ThemeManagerProvider = (props) => {
   const [isDark, setIsDark] = useState(false)
 
   const toggleDark = () => {
@@ -50,5 +41,3 @@ const ThemeManagerProvider = (props: Props) => {
     </ThemeManagerContext.Provider>
   )
 }
-
-export { ThemeManagerProvider }

@@ -20,8 +20,12 @@
       "node"
     ],
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./src/index.d.ts"
     ],
     "esModuleInterop": true
-  }
+  },
+  "include": [
+    "./src/**/*"
+  ]
 }

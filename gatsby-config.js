@@ -1,3 +1,5 @@
+require("ts-node").register({ files: true })
+
 module.exports = {
   siteMetadata: {
     title: `Funky Name Here`,
@@ -5,7 +7,7 @@ module.exports = {
     description: `Greg Perlman's blog`,
     siteUrl: `https://gregperlman.dev`,
     social: {
-      github: `gperl27`
+      github: `gperl27`,
     },
   },
   plugins: [
@@ -83,6 +85,13 @@ module.exports = {
     },
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-transition-link`
+    `gatsby-plugin-transition-link`,
+    {
+      resolve: "gatsby-styled-components-theme-manager",
+      options: {
+        light: require(`${__dirname}/src/utils/theme.ts`).lightTheme,
+        dark: require(`${__dirname}/src/utils/theme.ts`).darkTheme,
+      },
+    },
   ],
 }

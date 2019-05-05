@@ -1,7 +1,8 @@
 import { PageRendererProps } from "gatsby"
 import React, { ReactNode, useContext } from "react"
-import styled from "styled-components"
-import { ThemeManagerContext } from "../contexts/ThemeManager"
+import styled, { withTheme } from "styled-components"
+import { ThemeManagerContext } from "../../plugins/gatsby-styled-components-theme-manager"
+import { GlobalStyle, Theme } from "../utils/theme"
 import { rhythm, styledScale } from "../utils/typography"
 import { Footer } from "./footer"
 import { FadeLink } from "./link"
@@ -9,6 +10,7 @@ import { FadeLink } from "./link"
 interface Props extends PageRendererProps {
   title: string
   children: ReactNode
+  theme: Theme
 }
 
 const MainHeading = styled.h1`
@@ -68,7 +70,7 @@ const StyledHeader = styled.header`
   }
 `
 
-export const Layout = (props: Props) => {
+export const Layout = withTheme((props: Props) => {
   const { location, title, children } = props
   const rootPath = `/`
 
@@ -78,6 +80,7 @@ export const Layout = (props: Props) => {
 
   return (
     <Content>
+      <GlobalStyle theme={props.theme} />
       <StyledHeader>
         <HeaderTitle>
           <StyledLink to={`/`}>{title}</StyledLink>
@@ -97,4 +100,4 @@ export const Layout = (props: Props) => {
       <Footer />
     </Content>
   )
-}
+})

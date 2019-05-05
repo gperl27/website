@@ -1,16 +1,10 @@
-import React, { useContext } from "react"
-import {
-  createGlobalStyle,
-  DefaultTheme,
-  ThemeProvider,
-} from "styled-components"
+import { createGlobalStyle, DefaultTheme } from "styled-components"
 import {
   rcSliderTooltipArrowStyles,
   rcSliderTooltipStyles,
 } from "../components/common/baseStyles"
-import { ThemeManagerContext } from "./ThemeManager"
 
-interface Theme extends DefaultTheme {
+export interface Theme extends DefaultTheme {
   global: {
     bg: string
     color: string
@@ -67,7 +61,7 @@ const baseTheme = {
   },
 }
 
-const darkTheme: Theme = {
+export const darkTheme: Theme = {
   ...baseTheme,
   global: {
     bg: ColorPalette.darkShades,
@@ -77,7 +71,7 @@ const darkTheme: Theme = {
   },
 }
 
-const lightTheme: Theme = {
+export const lightTheme: Theme = {
   ...baseTheme,
   global: {
     bg: ColorPalette.lightShades,
@@ -87,11 +81,7 @@ const lightTheme: Theme = {
   },
 }
 
-interface Props {
-  children: any
-}
-
-const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
+export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   html, body {
     height: 100%; 
   }
@@ -125,22 +115,3 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     ${rcSliderTooltipArrowStyles};
   }
 `
-
-export type ThemeState = Theme & { isDark: boolean }
-
-export const StyledThemeProvider = (props: Props) => {
-  const themeManagerContext = useContext(ThemeManagerContext)
-
-  const isDark = themeManagerContext.isDark
-  const currentTheme = isDark ? darkTheme : lightTheme
-  const theme: ThemeState = { ...currentTheme, isDark }
-
-  return (
-    <ThemeProvider theme={theme}>
-      <>
-        {props.children}
-        <GlobalStyle theme={theme} />
-      </>
-    </ThemeProvider>
-  )
-}

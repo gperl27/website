@@ -1,7 +1,6 @@
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 require("source-map-support").install()
-require("ts-node").register()
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions

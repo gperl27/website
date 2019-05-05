@@ -1,12 +1,12 @@
 import { createSliderWithTooltip, Range } from "rc-slider"
 import React, { ComponentProps } from "react"
 import styled, { withTheme } from "styled-components"
-import { ThemeState } from "../../contexts/StyledThemeProvider"
+import { Theme } from "../../utils/theme"
 
 const RangeWithTooltip = createSliderWithTooltip(Range)
 
 interface Props extends Partial<ComponentProps<typeof RangeWithTooltip>> {
-  theme: ThemeState
+  theme: Theme
 }
 
 const StyledRange = styled(RangeWithTooltip)`
