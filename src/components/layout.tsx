@@ -1,9 +1,9 @@
 import { PageRendererProps } from "gatsby"
-import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
-import React, { ReactNode, useContext } from "react"
+import React, { ReactNode } from "react"
 import styled, { withTheme } from "styled-components"
 import { GlobalStyle, Theme } from "../utils/theme"
 import { rhythm, styledScale } from "../utils/typography"
+import { LightSwitch } from "./common/LightSwitch"
 import { Footer } from "./footer"
 import { FadeLink } from "./link"
 
@@ -20,14 +20,13 @@ const MainHeading = styled.h1`
   margin-top: 0;
   color: rgb(${props => props.theme.palette.mainBrand});
 
-  @media (max-width: 771px) {
+  @media (max-width: 991px) {
     ${styledScale(0.75)};
     margin-bottom: 0;
   }
 
   @media (max-width: 467px) {
     ${styledScale(0.5)};
-    margin-bottom: 0;
   }
 `
 
@@ -65,7 +64,7 @@ const StyledHeader = styled.header`
   @media (max-width: 991px) {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     margin-bottom: ${rhythm(1.5)};
   }
 `
@@ -76,8 +75,6 @@ export const Layout = withTheme((props: Props) => {
 
   const HeaderTitle = location.pathname === rootPath ? MainHeading : SubHeading
 
-  const themeContext = useContext(ThemeManagerContext)
-
   return (
     <Content>
       <GlobalStyle theme={props.theme} />
@@ -86,14 +83,7 @@ export const Layout = withTheme((props: Props) => {
           <StyledLink to={`/`}>{title}</StyledLink>
         </HeaderTitle>
         <ColorSwitchWrapper>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => themeContext.toggleDark()}
-              checked={themeContext.isDark}
-            />{" "}
-            Dark mode
-          </label>
+          <LightSwitch />
         </ColorSwitchWrapper>
       </StyledHeader>
       <main>{children}</main>
