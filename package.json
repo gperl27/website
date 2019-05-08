@@ -8,9 +8,6 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
-    "@types/rc-slider": "^8.6.3",
-    "@types/rc-tooltip": "^3.7.1",
-    "@types/styled-react-modal": "^1.1.1",
     "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.3.31",
     "gatsby-image": "^2.0.40",
@@ -41,6 +38,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
+    "react-icons": "^3.6.1",
     "react-typography": "^0.16.19",
     "styled-components": "^4.2.0",
     "styled-react-modal": "^1.2.1",
@@ -51,6 +49,10 @@
     "typography-theme-alton": "^0.16.19"
   },
   "devDependencies": {
+    "@types/rc-slider": "^8.6.3",
+    "@types/rc-tooltip": "^3.7.1",
+    "@types/react-icons": "^3.0.0",
+    "@types/styled-react-modal": "^1.1.1",
     "@babel/core": "^7.4.4",
     "@graphql-codegen/cli": "^1.1.1",
     "@graphql-codegen/typescript": "1.1.1",

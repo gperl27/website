@@ -1,6 +1,8 @@
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 import * as React from "react"
 import { useContext } from "react"
+// tslint:disable-next-line:no-submodule-imports
+import { MdLightbulbOutline } from "react-icons/md"
 import styled, { css, withTheme } from "styled-components"
 import { rhythm } from "../../utils/typography"
 
@@ -42,8 +44,8 @@ const StyledInput = styled.input`
 const StyledLabel = styled.div`
   display: block;
   position: relative;
-  width: ${rhythm(2.5)};
-  height: ${rhythm(4)};
+  width: ${rhythm(1.5)};
+  height: ${rhythm(3)};
   cursor: pointer;
   border-radius: ${rhythm(20)};
   background: rgb(${props => props.theme.palette.darkAccent});
@@ -53,13 +55,13 @@ const StyledLabel = styled.div`
   );
   box-shadow: inset 0 -5px 0 rgb(${props => props.theme.palette.darkAccent}),
     0 6px 5px rgba(${props => props.theme.palette.darkShades}, 0.75),
-    3px 16px 5px rgba(${props => props.theme.palette.darkShades}, 0.3);
+    3px 11px 5px rgba(${props => props.theme.palette.darkShades}, 0.3);
 
   &:before {
     content: "";
     position: absolute;
-    top: ${rhythm(-0.3)};
-    bottom: ${rhythm(-0.3)};
+    top: ${rhythm(-0.15)};
+    bottom: ${rhythm(-0.15)};
     left: ${rhythm(-0.15)};
     right: ${rhythm(-0.15)};
     z-index: -1;
@@ -74,8 +76,8 @@ const StyledLabel = styled.div`
   &:after {
     content: "";
     position: absolute;
-    width: ${rhythm(2.2)};
-    height: ${rhythm(3)};
+    width: ${rhythm(1.1)};
+    height: ${rhythm(2)};
     border-radius: 50%;
     z-index: -1;
     left: ${rhythm(0.7)};
@@ -97,23 +99,13 @@ const StyledLabel = styled.div`
       width: ${rhythm(1)};
       height: ${rhythm(2)};
     }
-
-    @media (max-width: 456px) {
-      width: ${rhythm(1)};
-      height: ${rhythm(2)};
-    }
   }
 
   ${props => props.theme.isDark && IsOnStyles};
 
-  @media (max-width: 991px) {
-    width: ${rhythm(1.5)};
-    height: ${rhythm(3)};
-  }
-
   @media (max-width: 456px) {
     width: ${rhythm(1.5)};
-    height: ${rhythm(2)};
+    height: ${rhythm(2.5)};
   }
 `
 
@@ -143,7 +135,9 @@ export const LightSwitch = withTheme(() => {
         checked={themeContext.isDark}
       />
       <StyledLabel onClick={() => themeContext.toggleDark()}>
-        <StyledInnerContent>X</StyledInnerContent>
+        <StyledInnerContent>
+          <MdLightbulbOutline size={rhythm(1.5)} />
+        </StyledInnerContent>
       </StyledLabel>
     </>
   )
