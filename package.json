@@ -32,6 +32,7 @@
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.18",
     "gsap": "^2.1.2",
+    "netlify-lambda": "^1.4.7",
     "prismjs": "^1.16.0",
     "rc-slider": "^8.6.9",
     "rc-tooltip": "^3.7.3",
@@ -49,19 +50,21 @@
     "typography-theme-alton": "^0.16.19"
   },
   "devDependencies": {
-    "@types/rc-slider": "^8.6.3",
-    "@types/rc-tooltip": "^3.7.1",
-    "@types/react-icons": "^3.0.0",
-    "@types/styled-react-modal": "^1.1.1",
     "@babel/core": "^7.4.4",
+    "@babel/preset-typescript": "^7.3.3",
     "@graphql-codegen/cli": "^1.1.1",
     "@graphql-codegen/typescript": "1.1.1",
     "@graphql-codegen/typescript-operations": "1.1.1",
     "@graphql-codegen/typescript-react-apollo": "1.1.1",
+    "@types/aws-lambda": "^8.10.25",
+    "@types/rc-slider": "^8.6.3",
+    "@types/rc-tooltip": "^3.7.1",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.8",
+    "@types/react-icons": "^3.0.0",
     "@types/styled-components": "^4.1.14",
+    "@types/styled-react-modal": "^1.1.1",
     "@types/typography": "^0.16.2",
     "graphql": "^14.2.1",
     "prettier": "^1.17.0",
@@ -90,7 +93,10 @@
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "tsc": "tsc --noEmit",
+    "tsc:clean": "tsc -b . --clean",
     "lint": "tslint --project .",
-    "gql-codegen": "graphql-codegen --config codegen.yml"
+    "gql-codegen": "graphql-codegen --config codegen.yml",
+    "start:lambda": "netlify-lambda serve lambda",
+    "build:lambda": "netlify-lambda build lambda"
   }
 }
