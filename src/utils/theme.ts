@@ -1,4 +1,5 @@
 import { createGlobalStyle, DefaultTheme } from "styled-components"
+import { palette } from "../../palette"
 import {
   rcSliderTooltipArrowStyles,
   rcSliderTooltipStyles,
@@ -28,12 +29,12 @@ enum ColorPalette {
   error = "244, 67, 54",
 }
 
-interface Palette {
-  lightShades: ColorPalette
-  lightAccent: ColorPalette
-  mainBrand: ColorPalette
-  darkAccent: ColorPalette
-  darkShades: ColorPalette
+export interface Palette {
+  lightShades: ColorPalette | string
+  lightAccent: ColorPalette | string
+  mainBrand: ColorPalette | string
+  darkAccent: ColorPalette | string
+  darkShades: ColorPalette | string
 }
 
 interface ActionPalette {
@@ -52,13 +53,7 @@ const baseTheme = {
     success: ColorPalette.success,
     warning: ColorPalette.warning,
   },
-  palette: {
-    darkAccent: ColorPalette.darkAccent,
-    darkShades: ColorPalette.darkShades,
-    lightAccent: ColorPalette.lightAccent,
-    lightShades: ColorPalette.lightShades,
-    mainBrand: ColorPalette.mainBrand,
-  },
+  palette,
 }
 
 export const darkTheme: Theme = {

@@ -8,6 +8,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "aws-lambda": "^0.1.2",
     "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.3.31",
     "gatsby-image": "^2.0.40",
@@ -32,6 +33,7 @@
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.18",
     "gsap": "^2.1.2",
+    "isomorphic-git": "^0.54.2",
     "netlify-lambda": "^1.4.7",
     "node-fetch": "^2.5.0",
     "prismjs": "^1.16.0",
@@ -68,6 +70,7 @@
     "@types/styled-components": "^4.1.14",
     "@types/styled-react-modal": "^1.1.1",
     "@types/typography": "^0.16.2",
+    "dotenv-webpack": "^1.7.0",
     "graphql": "^14.2.1",
     "prettier": "^1.17.0",
     "tslint": "^5.16.0",
@@ -98,7 +101,7 @@
     "tsc:clean": "tsc -b . --clean",
     "lint": "tslint --project .",
     "gql-codegen": "graphql-codegen --config codegen.yml",
-    "start:lambda": "netlify-lambda serve lambda",
+    "start:lambda": "netlify-lambda serve --config webpack.lambda.js lambda -t 20",
     "build:lambda": "netlify-lambda build lambda"
   }
 }
