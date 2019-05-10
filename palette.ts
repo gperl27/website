@@ -1,9 +1,1 @@
-import { Palette } from "./src/utils/theme"
-
-export const palette: Palette = {
-  darkAccent: "133, 129, 137",
-  darkShades: "32, 30, 32",
-  lightAccent: "139, 142, 149",
-  lightShades: "242, 242, 241",
-  mainBrand: "140, 100, 88",
-}
+export const palette = {"lightShades":"36,30,45","lightAccent":"13,20,35","mainBrand":"32,71,90","darkAccent":"7,95,101","darkShades":"138,186,141"}
