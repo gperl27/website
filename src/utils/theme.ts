@@ -38,18 +38,18 @@ export interface Palette {
 }
 
 interface ActionPalette {
-  primary: ColorPalette
-  info: ColorPalette
-  success: ColorPalette
-  warning: ColorPalette
-  error: ColorPalette
+  primary: ColorPalette | string
+  info: ColorPalette | string
+  success: ColorPalette | string
+  warning: ColorPalette | string
+  error: ColorPalette | string
 }
 
 const baseTheme = {
   actions: {
     error: ColorPalette.error,
-    info: ColorPalette.darkShades,
-    primary: ColorPalette.mainBrand,
+    info: palette.darkShades,
+    primary: palette.mainBrand,
     success: ColorPalette.success,
     warning: ColorPalette.warning,
   },
@@ -59,20 +59,20 @@ const baseTheme = {
 export const darkTheme: Theme = {
   ...baseTheme,
   global: {
-    bg: ColorPalette.darkShades,
-    color: ColorPalette.lightShades,
-    link: ColorPalette.mainBrand,
-    linkHover: ColorPalette.lightAccent,
+    bg: palette.darkShades,
+    color: palette.lightShades,
+    link: palette.mainBrand,
+    linkHover: palette.lightAccent,
   },
 }
 
 export const lightTheme: Theme = {
   ...baseTheme,
   global: {
-    bg: ColorPalette.lightShades,
-    color: ColorPalette.darkShades,
-    link: ColorPalette.mainBrand,
-    linkHover: ColorPalette.darkAccent,
+    bg: palette.lightShades,
+    color: palette.darkShades,
+    link: palette.mainBrand,
+    linkHover: palette.darkAccent,
   },
 }
 

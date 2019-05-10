@@ -58,7 +58,7 @@ const FILENAME = "palette.ts"
 const addNewPaletteToRemoteRepository = async (palette: Palette) => {
   console.log("begin git upstream process")
 
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "test-"))
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "lambda-"))
   console.log(dir, "initialized dir to clone remote repo")
 
   console.log("cloning from remote")
@@ -77,13 +77,10 @@ const addNewPaletteToRemoteRepository = async (palette: Palette) => {
     throw e
   }
 
-  // Now it should not be empty...
+  const file = `export const palette = ${JSON.stringify(palette)}`
+
   fs.readdirSync(dir)
-  fs.writeFileSync(
-    path.join(dir, FILENAME),
-    JSON.stringify({ palette }),
-    "utf8"
-  )
+  fs.writeFileSync(path.join(dir, FILENAME), file, "utf8")
 
   console.log("adding file")
   try {
