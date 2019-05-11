@@ -5,7 +5,7 @@ import fetch from "node-fetch"
 import os from "os"
 import path from "path"
 
-console.log(fetch, 'fetch')
+console.log(fetch, "fetch")
 
 global.fetch = fetch
 
@@ -20,10 +20,9 @@ export async function handler(event: any, context: Context) {
   console.log("cloning from remote")
   try {
     await git.clone({
-      corsProxy: "https://cors.isomorphic-git.org/",
+      corsProxy: "https://cors.isomorphic-git.org",
       depth: 10,
       dir,
-      fs,
       ref: "master",
       singleBranch: true,
       url: process.env.REPO_URL,
@@ -36,7 +35,8 @@ export async function handler(event: any, context: Context) {
       statusCode: 200,
     }
   } catch (e) {
-    console.log(e, "Failed at cloning repo")
+    console.log("Failed at cloning repo")
+    console.log(e.message)
 
     return {
       error: e.message,
