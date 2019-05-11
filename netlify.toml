@@ -2,5 +2,8 @@
   functions = "dist_lambda"
 
 [[redirects]]
-  from = "/.netlify/functions/test-clone"
-  to = "https://cors.isomorphic-git.org/"
+  from = "/search"
+  to = "https://api.mysearch.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
