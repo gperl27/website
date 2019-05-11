@@ -11,7 +11,7 @@ const FILENAME = "palette.ts"
 export const addNewPaletteToRemoteRepository = async (palette: Palette) => {
   console.log("begin git upstream process")
 
-  if (!process.env.REPOSITORY_URL) {
+  if (!process.env.REPO_URL) {
     throw new Error("invalid repository url")
   }
 
@@ -26,7 +26,7 @@ export const addNewPaletteToRemoteRepository = async (palette: Palette) => {
       fs,
       ref: "master",
       singleBranch: true,
-      url: process.env.REPOSITORY_URL,
+      url: process.env.REPO_URL,
     })
   } catch (e) {
     console.log(e, "Failed at cloning repo")
