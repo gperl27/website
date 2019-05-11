@@ -66,7 +66,7 @@ const lightSliderTooltipStyles = css`
 `
 
 const darkSliderTooltipStyles = css`
-  color: rgb(${props => props.theme.palette.darkShades}) !important;
+  color: rgb(${props => props.theme.palette.lightShades}) !important;
   background-color: rgb(${props => props.theme.palette.darkAccent}) !important;
   border-color: rgb(${props => props.theme.palette.darkAccent}) !important;
   box-shadow: 0 0 4px rgb(${props => props.theme.palette.darkAccent}) !important;
