@@ -1,9 +1,2 @@
 [build]
   functions = "dist_lambda"
-
-[[redirects]]
-  from = "/.netlify/functions/test-clone"
-  to = "https://cors.isomorphic-git.org/"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}

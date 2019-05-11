@@ -1,13 +1,9 @@
 import { Context } from "aws-lambda"
 import fs from "fs"
-import * as git from "isomorphic-git"
-import fetch from "node-fetch"
 import os from "os"
 import path from "path"
 
-console.log(fetch, "fetch")
-
-global.fetch = fetch
+import { Clone } from "nodegit"
 
 export async function handler(event: any, context: Context) {
   if (!process.env.REPO_URL) {
@@ -15,32 +11,19 @@ export async function handler(event: any, context: Context) {
   }
 
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "lambda-"))
-  console.log(dir, "clone testing")
 
   console.log("cloning from remote")
-  try {
-    await git.clone({
-      corsProxy: "https://cors.isomorphic-git.org",
-      depth: 10,
-      dir,
-      ref: "master",
-      singleBranch: true,
-      url: process.env.REPO_URL,
-    })
 
-    console.log("done cloning")
+  const repo = await Clone.clone(process.env.REPO_URL, dir)
 
-    return {
-      body: "success",
-      statusCode: 200,
-    }
-  } catch (e) {
-    console.log("Failed at cloning repo")
-    console.log(e.message)
+  const commit = await repo.getHeadCommit()
 
-    return {
-      error: e.message,
-      statusCode: 500,
-    }
+  return {
+    body: JSON.stringify({
+      author: commit.author(),
+      date: commit.date(),
+      message: commit.message(),
+    }),
+    statusCode: 200,
   }
 }

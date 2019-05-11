@@ -8,6 +8,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "@types/nodegit": "^0.24.6",
     "aws-lambda": "^0.1.2",
     "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.3.31",
@@ -36,6 +37,7 @@
     "isomorphic-git": "^0.54.2",
     "netlify-lambda": "^1.4.7",
     "node-fetch": "^2.5.0",
+    "nodegit": "^0.24.3",
     "prismjs": "^1.16.0",
     "rc-slider": "^8.6.9",
     "rc-tooltip": "^3.7.3",
