@@ -95,7 +95,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "gatsby build && netlify-lambda build lambda",
+    "build": "gatsby build && netlify-lambda build --config webpack.lambda.js lambda",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
@@ -106,6 +106,6 @@
     "lint": "tslint --project .",
     "gql-codegen": "graphql-codegen --config codegen.yml",
     "start:lambda": "netlify-lambda serve --config webpack.lambda.js lambda -t 20",
-    "build:lambda": "netlify-lambda build lambda"
+    "build:lambda": "netlify-lambda build --config webpack.lambda.js lambda"
   }
 }
