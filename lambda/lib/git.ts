@@ -21,6 +21,7 @@ export const addNewPaletteToRemoteRepository = async (palette: Palette) => {
   console.log("cloning from remote")
   try {
     await git.clone({
+      corsProxy: "https://cors.isomorphic-git.org/",
       depth: 10,
       dir,
       fs,

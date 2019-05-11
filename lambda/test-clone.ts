@@ -5,6 +5,8 @@ import fetch from "node-fetch"
 import os from "os"
 import path from "path"
 
+console.log(fetch, 'fetch')
+
 global.fetch = fetch
 
 export async function handler(event: any, context: Context) {
@@ -18,6 +20,7 @@ export async function handler(event: any, context: Context) {
   console.log("cloning from remote")
   try {
     await git.clone({
+      corsProxy: "https://cors.isomorphic-git.org/",
       depth: 10,
       dir,
       fs,
