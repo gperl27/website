@@ -2,11 +2,20 @@
 import { Context } from "aws-lambda"
 import fetch from "node-fetch"
 import { Palette } from "../src/utils/theme"
-import { ColormindResponse } from "./lib/git"
+import { getFileContent, writeFileToRemote } from "./lib/github"
 import { sendText } from "./lib/twilio"
 
 // @ts-ignore
 global.fetch = fetch
+
+interface ColormindResponse {
+  result: number[][]
+}
+
+const filename = "palette.ts"
+const githubUrl = `https://api.github.com/repos/${
+  process.env.GITHUB_USERNAME
+}/website/contents/${filename}`
 
 export const handler = async (event: any, context: Context) => {
   try {
@@ -30,46 +39,27 @@ export const handler = async (event: any, context: Context) => {
 
     console.log("attempting to write new palette to remote")
 
-    const getFile = await fetch(
-      "https://api.github.com/repos/gperl27/website/contents/palette.ts",
-      {
-        // body: JSON.stringify({
-        //   content: new Buffer(file).toString("base64"),
-        //   message: "Automated palette refresh",
-        // }),
-        headers: {
-          "User-Agent": process.env.GITHUB_USERNAME || "",
-        },
-        method: "GET",
-      }
-    )
-
-    const fileResponse = await getFile.json()
-
     try {
-      await fetch(
-        "https://api.github.com/repos/gperl27/website/contents/palette.ts",
-        {
-          body: JSON.stringify({
-            content: new Buffer(file).toString("base64"),
-            message: "Automated palette refresh",
-            sha: fileResponse.sha,
-          }),
-          headers: {
-            Authorization: "token " + process.env.GITHUB_TOKEN || "",
-            "User-Agent": process.env.GITHUB_USERNAME || "",
-          },
-          method: "PUT",
-        }
-      )
+      const fileResponse = await getFileContent(githubUrl)
 
-      console.log("file written successfully to remote")
+      await writeFileToRemote(githubUrl, {
+        content: new Buffer(file).toString("base64"),
+        message: "Automated palette refresh",
+        sha: fileResponse.sha,
+      })
     } catch (e) {
-      console.log("error writing file to remote", e.message)
+      console.log("error communicating with github")
+      console.log(e.message)
 
-      return {
-        body: e.message,
-        statusCode: 500,
+      try {
+        await sendText("Unable to add new palette")
+      } catch (e) {
+        console.log("failed to send text")
+
+        return {
+          body: JSON.stringify({ msg: e.message }),
+          statusCode: 500,
+        }
       }
     }
 
