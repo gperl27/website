@@ -8,6 +8,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "@octokit/rest": "^16.25.3",
     "@types/nodegit": "^0.24.6",
     "aws-lambda": "^0.1.2",
     "babel-plugin-styled-components": "^1.10.0",

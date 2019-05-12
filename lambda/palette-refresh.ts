@@ -2,17 +2,13 @@
 import { Context } from "aws-lambda"
 import fetch from "node-fetch"
 import { Palette } from "../src/utils/theme"
-import { addNewPaletteToRemoteRepository, ColormindResponse } from "./lib/git"
+import { ColormindResponse } from "./lib/git"
 import { sendText } from "./lib/twilio"
-
-import middy from "middy"
-// tslint:disable-next-line:no-submodule-imports
-import { cors } from "middy/middlewares"
 
 // @ts-ignore
 global.fetch = fetch
 
-const lambda = async (event: any, context: Context) => {
+export const handler = async (event: any, context: Context) => {
   try {
     console.log("fetching colormind model")
     const response = await fetch("http://colormind.io/api/", {
@@ -30,16 +26,49 @@ const lambda = async (event: any, context: Context) => {
 
     const data = await response.json()
     const palette = transformPalette(data)
+    const file = `export const palette = ${JSON.stringify(palette)}`
 
     console.log("attempting to write new palette to remote")
 
+    const getFile = await fetch(
+      "https://api.github.com/repos/gperl27/website/contents/palette.ts",
+      {
+        // body: JSON.stringify({
+        //   content: new Buffer(file).toString("base64"),
+        //   message: "Automated palette refresh",
+        // }),
+        headers: {
+          "User-Agent": process.env.GITHUB_USERNAME || "",
+        },
+        method: "GET",
+      }
+    )
+
+    const fileResponse = await getFile.json()
+
     try {
-      await addNewPaletteToRemoteRepository(palette)
+      await fetch(
+        "https://api.github.com/repos/gperl27/website/contents/palette.ts",
+        {
+          body: JSON.stringify({
+            content: new Buffer(file).toString("base64"),
+            message: "Automated palette refresh",
+            sha: fileResponse.sha,
+          }),
+          headers: {
+            Authorization: "token " + process.env.GITHUB_TOKEN || "",
+            "User-Agent": process.env.GITHUB_USERNAME || "",
+          },
+          method: "PUT",
+        }
+      )
+
+      console.log("file written successfully to remote")
     } catch (e) {
-      console.log("failed to add new palette to remote")
+      console.log("error writing file to remote", e.message)
 
       return {
-        body: JSON.stringify({ msg: e.message }),
+        body: e.message,
         statusCode: 500,
       }
     }
@@ -85,5 +114,3 @@ const transformPalette = (colormindResults: ColormindResponse): Palette => {
   }
   // tslint:enable:object-literal-sort-keys
 }
-
-export const handler = middy(lambda).use(cors())
