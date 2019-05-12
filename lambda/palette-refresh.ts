@@ -5,10 +5,14 @@ import { Palette } from "../src/utils/theme"
 import { addNewPaletteToRemoteRepository, ColormindResponse } from "./lib/git"
 import { sendText } from "./lib/twilio"
 
+import middy from "middy"
+// tslint:disable-next-line:no-submodule-imports
+import { cors } from "middy/middlewares"
+
 // @ts-ignore
 global.fetch = fetch
 
-export async function handler(event: any, context: Context) {
+const lambda = async (event: any, context: Context) => {
   try {
     console.log("fetching colormind model")
     const response = await fetch("http://colormind.io/api/", {
@@ -81,3 +85,5 @@ const transformPalette = (colormindResults: ColormindResponse): Palette => {
   }
   // tslint:enable:object-literal-sort-keys
 }
+
+export const handler = middy(lambda).use(cors())

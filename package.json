@@ -35,6 +35,7 @@
     "gatsby-transformer-sharp": "^2.1.18",
     "gsap": "^2.1.2",
     "isomorphic-git": "^0.54.2",
+    "middy": "^0.25.1",
     "netlify-lambda": "^1.4.7",
     "node-fetch": "^2.5.0",
     "nodegit": "^0.24.3",
