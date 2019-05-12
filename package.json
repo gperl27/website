@@ -109,6 +109,8 @@
     "lint": "tslint --project .",
     "gql-codegen": "graphql-codegen --config codegen.yml",
     "start:lambda": "netlify-lambda serve --config webpack.lambda.js lambda",
-    "build:lambda": "netlify-lambda build --config webpack.lambda.js lambda"
+    "start:lambda:prod": "netlify-lambda serve --config webpack.production.js lambda",
+    "build:lambda": "netlify-lambda build --config webpack.lambda.js lambda",
+    "build:lambda:prod": "netlify-lambda build --config webpack.production.js lambda"
   }
 }
