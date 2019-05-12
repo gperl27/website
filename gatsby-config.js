@@ -1,3 +1,4 @@
+const proxy = require("http-proxy-middleware")
 require("ts-node").register({ files: true })
 
 module.exports = {
@@ -94,4 +95,15 @@ module.exports = {
       },
     },
   ],
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      }),
+    )
+  },
 }
