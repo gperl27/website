@@ -1,5 +1,8 @@
 import { Context } from "aws-lambda"
 import * as git from "isomorphic-git"
+import fetch from "node-fetch"
+
+global.fetch = fetch
 
 export async function handler(event: any, context: Context) {
   console.log("test hitting remote git")
