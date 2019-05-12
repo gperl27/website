@@ -1,1 +1,1 @@
-export const palette = {"lightShades":"251,249,241","lightAccent":"188,166,117","mainBrand":"145,134,103","darkAccent":"77,85,74","darkShades":"67,62,57"}
+export const palette = {"lightShades":"254,254,253","lightAccent":"198,188,130","mainBrand":"116,115,83","darkAccent":"61,67,46","darkShades":"43,28,12"}
