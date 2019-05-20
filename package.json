@@ -29,7 +29,7 @@
     "gatsby-remark-responsive-iframe": "^2.1.1",
     "gatsby-remark-smartypants": "^2.0.9",
     "gatsby-source-filesystem": "^2.0.32",
-    "gatsby-styled-components-dark-mode": "^1.0.3",
+    "gatsby-styled-components-dark-mode": "^1.0.7",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.18",
     "gsap": "^2.1.2",
