@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-submodule-imports
 import { createGlobalStyle, DefaultTheme } from "styled-components"
 import { palette } from "../../palette"
 import {
@@ -11,6 +12,11 @@ export interface Theme extends DefaultTheme {
     color: string
     link: string
     linkHover: string
+    code: {
+      pre: {
+        background: string
+      }
+    }
   }
 
   palette: Palette
@@ -60,6 +66,11 @@ export const darkTheme: Theme = {
   ...baseTheme,
   global: {
     bg: palette.darkShades,
+    code: {
+      pre: {
+        background: palette.lightShades,
+      },
+    },
     color: palette.lightShades,
     link: palette.mainBrand,
     linkHover: palette.lightAccent,
@@ -70,6 +81,11 @@ export const lightTheme: Theme = {
   ...baseTheme,
   global: {
     bg: palette.lightShades,
+    code: {
+      pre: {
+        background: palette.darkShades,
+      },
+    },
     color: palette.darkShades,
     link: palette.mainBrand,
     linkHover: palette.darkAccent,
@@ -108,5 +124,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   .rc-slider-tooltip-arrow {
     ${rcSliderTooltipArrowStyles};
+  }
+  
+  .gatsby-highlight > pre {
+    background-color: rgb(${props =>
+      props.theme.global.code.pre.background}) !important;
   }
 `
