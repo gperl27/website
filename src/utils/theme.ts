@@ -13,9 +13,9 @@ export interface Theme extends DefaultTheme {
     color: string
     link: string
     linkHover: string
+    inlineBgColor: string
   }
   code: {
-    inlineBgColor: string
     highlightCodeLineBg: string
     highlightLineBorderLeftColor: string
   }
@@ -72,6 +72,7 @@ export const darkTheme: Theme = {
   global: {
     bg: palette.darkShades,
     color: palette.lightShades,
+    inlineBgColor: "82,174,160,0.7",
     link: palette.mainBrand,
     linkHover: palette.lightAccent,
   },
@@ -82,6 +83,7 @@ export const lightTheme: Theme = {
   global: {
     bg: palette.lightShades,
     color: palette.darkShades,
+    inlineBgColor: "255,229,100,0.2",
     link: palette.mainBrand,
     linkHover: palette.darkAccent,
   },
@@ -123,12 +125,16 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   .language-text {
     font-size: ${rhythm(0.65)} !important; 
-    background: rgba(${props => props.theme.code.inlineBgColor}) !important;
+    background: rgba(${props => props.theme.global.inlineBgColor}) !important;
     color: rgb(${props => props.theme.global.color}) !important;
   }
   
   .gatsby-highlight > pre {
     font-size: ${rhythm(0.5)} !important;
+  }
+  
+  code {
+    white-space: pre-wrap !important;
   }
   
   .gatsby-highlight-code-line {
