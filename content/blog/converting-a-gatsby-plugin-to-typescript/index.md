@@ -52,7 +52,7 @@ export const LanguageProvider = (props) => {
 We'll expose a provider that manages the `language` of our application, and the `changeLanguage` function that allows us to change the language to whatever string we pass it - as in `changeLanguage('Spanish')`. For a deep dive on context, check out the [React official docs](https://reactjs.org/docs/context.html).
 
 `src/gatsby-browser.jsx`
-```javascript
+```jsx
 import React from 'react'
 import { LanguageProvider } from './languageProvider';
 
@@ -88,7 +88,7 @@ This will allow us to run a babel script from the command line that will put our
 Let's add a `.babelrc` file to the root of our project:
 
 `.babelrc`
-```
+```javascript
 {
   "presets": [
     [
@@ -108,13 +108,12 @@ Last, let's make our lives easier by adding a script to `package.json` that will
 `package.json`
 ```json
 "scripts": {
-    "build": "babel src --out-dir .",
-    ...
+    "build": "babel src --out-dir .", // highlight-line
   },
 ```
 
 Ok let's try it out! Run `$ yarn build`
-```
+```none
 yarn run v1.12.3
 $ babel src --out-dir .
 Successfully compiled 3 files with Babel.
@@ -123,7 +122,7 @@ Successfully compiled 3 files with Babel.
 
 Your directory should now look like this:
 
-```
+```none
 - src
     - index.js
     - languageProvider.jsx
@@ -139,21 +138,22 @@ We'll test our plugin locally by installing it in a sample gatsby project.
 
 Let's clone down a gatsby starter repo. Make sure not to run this in the same place as the plugin we made.
 
-`git clone https://github.com/gatsbyjs/gatsby-starter-default.git gatsby-site`
+`$ git clone https://github.com/gatsbyjs/gatsby-starter-default.git gatsby-site`
 
 Let's change into this new directory we made and make sure everything is up and running:
 
 `$ cd gatsby-site`
+
 `$ yarn develop`
 
 Let's navigate to localhost:8000 to make sure things are running smoothly:
 
-PICTURE HERE
+![localhost:8000 Gatsby homepage](./gatsby-starter.png)
 
 We're ready to install and start using our language plugin. To run a local plugin, we have to put our package in a folder called `plugins` inside our gatsby project. Check the [docs](https://www.gatsbyjs.org/docs/creating-a-local-plugin/) if you want more info on this.
 
 Our directory structure should look like this:
-```
+```none
 - node_modules
 - public
 - plugins // Create this folder
@@ -164,11 +164,11 @@ Our directory structure should look like this:
         - src
             index.js
             languageProvider.jsx
-            ...
+            // ...
         - index.js
         - languageProvider.js
-        ...
-...
+        // ...
+// ...
 - src
 ```
 
@@ -195,7 +195,7 @@ We're going to replace all the code in our landing page with a simple interface 
 2. Allow the user to change the language
 
 Replace `src/pages/index.js` with the following:
-```javascript
+```jsx
 import React from "react"
 import { LanguageContext } from '../../plugins/gatsby-plugin-language-chooser'
 
@@ -226,7 +226,7 @@ export default IndexPage
 ```
 
 Replace `src/pages/page-2.js` with the following:
-```javascript
+```jsx
 import React from "react"
 import { LanguageContext } from '../../plugins/gatsby-plugin-language-chooser'
 import { Link } from "gatsby"
@@ -247,9 +247,7 @@ export default IndexPage
 
 Navigate to your browser and you should see our plugin working it its magic:
 
-PICTURE HERE
-
-PICTURE HERE
+![Language chooser navigation](./language-with-navigation.gif)
 
 And that's it, our application now can track across all its pages what language we're using thanks to our plugin. The user doesn't have to manage any of the state or functionality.
 
@@ -322,6 +320,8 @@ Change `src/languageProvider.jsx` -> `src/languageProvider.tsx`
 
 If you're using an IDE like Jetbrains or Visual Studio, you'll probably already start to see a ton of Typescript errors. Don't fret! This is actually a very good thing. We're getting told our code isn't *type-safe*. This means we might encounter `null` or `undefined` at runtime like we talked about at the very beginning; this would lead to poor user experience if our application started misbehaving and not working. 
 
+![Webstorm typechecking languageProvider.tsx](./initial-typescript-conversion-file.png)
+
 In our case, we enabled `strict` mode in our `tsconfig.json` file, so our code won't even compile until we fix all the Typescript errors. Again, this is awesome because this let's us squash bugs before the code even get's interpreted by the browser.
 
 Ok, let's make `languageProvider.tsx` type-safe:
@@ -379,7 +379,7 @@ Open up `package.json` and change the build script to:
 
 Running `yarn build` should yield us:
 
-```
+```markdown
 yarn run v1.12.3
 $ tsc -b
 ✨  Done in 6.97s.
@@ -445,7 +445,7 @@ export const LanguageProvider = (props: Props) => {
 
 Let's run `$ yarn build` for a quick sanity check:
 
-```
+```markdown
 yarn run v1.12.3
 $ tsc -b
 ✨  Done in 5.67s.

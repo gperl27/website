@@ -5,6 +5,7 @@ import {
   rcSliderTooltipArrowStyles,
   rcSliderTooltipStyles,
 } from "../components/common/baseStyles"
+import { rhythm } from "./typography"
 
 export interface Theme extends DefaultTheme {
   global: {
@@ -12,13 +13,12 @@ export interface Theme extends DefaultTheme {
     color: string
     link: string
     linkHover: string
-    code: {
-      pre: {
-        background: string
-      }
-    }
   }
-
+  code: {
+    inlineBgColor: string
+    highlightCodeLineBg: string
+    highlightLineBorderLeftColor: string
+  }
   palette: Palette
   actions: ActionPalette
 }
@@ -59,6 +59,11 @@ const baseTheme = {
     success: ColorPalette.success,
     warning: ColorPalette.warning,
   },
+  code: {
+    highlightCodeLineBg: "#575D61",
+    highlightLineBorderLeftColor: "#FFDE6B",
+    inlineBgColor: "255,229,100,0.2",
+  },
   palette,
 }
 
@@ -66,11 +71,6 @@ export const darkTheme: Theme = {
   ...baseTheme,
   global: {
     bg: palette.darkShades,
-    code: {
-      pre: {
-        background: palette.lightShades,
-      },
-    },
     color: palette.lightShades,
     link: palette.mainBrand,
     linkHover: palette.lightAccent,
@@ -81,11 +81,6 @@ export const lightTheme: Theme = {
   ...baseTheme,
   global: {
     bg: palette.lightShades,
-    code: {
-      pre: {
-        background: palette.darkShades,
-      },
-    },
     color: palette.darkShades,
     link: palette.mainBrand,
     linkHover: palette.darkAccent,
@@ -126,8 +121,23 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     ${rcSliderTooltipArrowStyles};
   }
   
-  .gatsby-highlight > pre {
-    background-color: rgb(${props =>
-      props.theme.global.code.pre.background}) !important;
+  .language-text {
+    font-size: ${rhythm(0.65)} !important; 
+    background: rgba(${props => props.theme.code.inlineBgColor}) !important;
+    color: rgb(${props => props.theme.global.color}) !important;
   }
+  
+  .gatsby-highlight > pre {
+    font-size: ${rhythm(0.5)} !important;
+  }
+  
+  .gatsby-highlight-code-line {
+    background-color: ${props => props.theme.code.highlightCodeLineBg};
+    display: block;
+    padding-left: 0.75em;
+    border-left: .25em solid ${props =>
+      props.theme.code.highlightLineBorderLeftColor};
+    margin-right: -1em;
+    margin-left: -1em;
+}
 `

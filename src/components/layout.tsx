@@ -34,6 +34,11 @@ const SubHeading = styled.h2`
   font-family: Montserrat, serif;
   margin-bottom: ${rhythm(2)};
   color: rgb(${props => props.theme.palette.mainBrand});
+
+  @media (max-width: 991px) {
+    ${styledScale(0.75)};
+    margin-bottom: 0;
+  }
 `
 
 const StyledLink = styled(FadeLink)`

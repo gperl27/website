@@ -3,7 +3,7 @@ require("ts-node").register({ files: true })
 
 module.exports = {
   siteMetadata: {
-    title: `Funky Name Here`,
+    title: `Greg's Dev Shed`,
     author: `Greg Perlman`,
     description: `Greg Perlman's blog`,
     siteUrl: `https://gregperlman.dev`,
@@ -49,7 +49,12 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              // noInlineHighlight: true,
+            }
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],

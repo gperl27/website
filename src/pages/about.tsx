@@ -6,7 +6,7 @@ import { SEO } from "../components/seo"
 import { Query, SitePageContext } from "../graphql-types"
 import { rhythm } from "../utils/typography"
 
-const Title = styled.h3`
+const Title = styled.h4`
   font-family: Montserrat, serif;
   margin-bottom: ${rhythm(1 / 4)};
   margin-top: ${rhythm(2)};
@@ -33,6 +33,13 @@ const About = (props: Props) => {
         keywords={[`about`, `mantra`, `personal`, `programming`]}
       />
       <div>
+        <AboutMe>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: me.html!,
+            }}
+          />
+        </AboutMe>
         <Title>{mantra.frontmatter!.title!}</Title>
         <div
           dangerouslySetInnerHTML={{
@@ -40,13 +47,6 @@ const About = (props: Props) => {
           }}
         />
       </div>
-      <AboutMe>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: me.html!,
-          }}
-        />
-      </AboutMe>
     </Layout>
   )
 }

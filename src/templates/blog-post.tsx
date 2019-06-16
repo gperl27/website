@@ -17,7 +17,7 @@ const Date = styled.p`
   display: block;
   ${styledScale(-1 / 5)};
   margin-bottom: ${rhythm(1)};
-  margin-top: ${rhythm(-1)};
+  margin-top: ${rhythm(-0.5)};
 `
 
 const Divider = styled.hr`
