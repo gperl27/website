@@ -61,6 +61,8 @@ const BlogIndex = (props: Props) => {
       />
       <Bio />
       {posts.map(({ node }: { node: MarkdownRemark }) => {
+        // console.log(node, 'NODE')
+
         const frontmatter = node!.frontmatter!
         const fields = node!.fields!
         const slug = fields.slug!

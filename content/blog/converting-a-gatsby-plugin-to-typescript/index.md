@@ -1,6 +1,7 @@
 ---
 title: Converting a Gatsby Plugin to Typescript
-date: "2019-05-23"
+date: 2019-05-23
+description: Making type-safe Gatsby plugins in a JavaScript world
 ---
 > Uncaught TypeError: Cannot read property 'welcomeToJavascript' of undefined 
 
@@ -10,11 +11,11 @@ Yes, we've all seen this infamous message one way or another. Wouldn't it be fan
 
 Typescript is a superset of JavaScript that will let us write our code in a type-safe way. Now, I will not be doing a deep dive on Typescript, as there are already quite a few articles for such endeavors at your disposal.
 
-In this post we'll walk through creating a simple Gatsby project, creating our own plugin, and then converting the plugin to use Typescript. Gatsby is a popular framework for creating static web sites. By static, I mean rendering **page1.html, page2.html, page3.html, etc** on your server, versus something like **myHipsterTrendingSPA.html** that injects a javascript application and such. I like to associate a static website with semantic HTML. As in `<a href="/page2.html">Next</a>` will, in fact, direct you to that file's location.
+In this post we'll walk through creating a simple Gatsby project, creating our own plugin, and then converting the plugin to use Typescript. Gatsby is a popular framework for creating static web sites. By static, I mean rendering `page1.html, page2.html, page3.html, etc` on your server, versus something like `myHipsterTrendingSPA.html` that injects a javascript application and such. I like to associate a static website with semantic HTML. As in `<a href="/page2.html">Next</a>` will, in fact, direct you to that file's location.
 
 Why Gatsby over just dumping your files onto a server? Gatsby let's you write JavaScript, specifically React, to create your static pages. Additionally, you get a rich plugin ecosystem, the capacity to use your fancy bundlers and loaders, and excellent documentation. Simply, it allows you to focus on solving your problems at hand, whether it's a CMS or a blog. Now (again), this article aims *not* and delve into its internals.  
 
-In aiming to convert my own Gatsby plugin to TypeScript, I struggled looking for gatsby-plugins that had TypeScript support (checking the sourcecode or if they exposed an **index.d.ts** file) to serve as reference. Ultimately, such a task wasn't too burdening and hence, here we are.
+In aiming to convert my own Gatsby plugin to TypeScript, I struggled looking for gatsby-plugins that had TypeScript support (checking the sourcecode or if they exposed an `index.d.ts` file) to serve as reference. Ultimately, such a task wasn't too burdening and hence, here we are.
 
 ## The Plugin
 
@@ -26,7 +27,7 @@ We edit files in `/src` and compile the files into vanilla JavaScript at the roo
 
 Let's take a look at our source files:
 
-`src/languageProvider.jsx`
+**src/languageProvider.jsx**
 ```javascript
 import React from 'react'
 
@@ -51,7 +52,7 @@ export const LanguageProvider = (props) => {
 ```
 We'll expose a provider that manages the `language` of our application, and the `changeLanguage` function that allows us to change the language to whatever string we pass it - as in `changeLanguage('Spanish')`. For a deep dive on context, check out the [React official docs](https://reactjs.org/docs/context.html).
 
-`src/gatsby-browser.jsx`
+**src/gatsby-browser.jsx**
 ```jsx
 import React from 'react'
 import { LanguageProvider } from './languageProvider';
@@ -64,7 +65,7 @@ export const wrapRootElement = ({element}) => (
 ```
 We'll utilize a Gatsby-specific API [`wrapRootElement`](https://www.gatsbyjs.org/docs/browser-apis/#wrapRootElement) to wrap our application with our `languageProvider`. This means our Gatsby application will have access to our language API at any given point. Perfect for, say, showing the ability to toggle the language in a footer or header at any point while a user is on our website.
 
-`src/index.js`
+**src/index.js**
 ```javascript
 import { LanguageContext } from './languageProvider'
 
@@ -87,7 +88,7 @@ This will allow us to run a babel script from the command line that will put our
 
 Let's add a `.babelrc` file to the root of our project:
 
-`.babelrc`
+**.babelrc**
 ```javascript
 {
   "presets": [
@@ -105,7 +106,7 @@ Let's add a `.babelrc` file to the root of our project:
 
 Last, let's make our lives easier by adding a script to `package.json` that will put the files from `/src` into the root directory
 
-`package.json`
+**package.json**
 ```json
 "scripts": {
     "build": "babel src --out-dir .", // highlight-line
@@ -162,18 +163,16 @@ Our directory structure should look like this:
     // copy it over or move it and rename it if you have to
     - gatsby-plugin-language-chooser 
         - src
-            index.js
-            languageProvider.jsx
-            // ...
+            - index.js
+            - languageProvider.jsx
         - index.js
         - languageProvider.js
-        // ...
-// ...
 - src
 ```
 
 We'll now configure it in `gatsby-config.js`
 
+**gatsby-config.js**
 ```javascript
 module.exports = {
   plugins: [
@@ -195,6 +194,8 @@ We're going to replace all the code in our landing page with a simple interface 
 2. Allow the user to change the language
 
 Replace `src/pages/index.js` with the following:
+
+**src/pages/index.js**
 ```jsx
 import React from "react"
 import { LanguageContext } from '../../plugins/gatsby-plugin-language-chooser'
@@ -226,6 +227,8 @@ export default IndexPage
 ```
 
 Replace `src/pages/page-2.js` with the following:
+
+**src/pages/page-2.js**
 ```jsx
 import React from "react"
 import { LanguageContext } from '../../plugins/gatsby-plugin-language-chooser'
@@ -269,7 +272,7 @@ Well need to add a `tsconfig.json` to tell the compiler how to check our code an
 
 Add to the root of your plugin folder a `tsconfig.json` file
 
-`tsconfig.json`
+**tsconfig.json**
 ```json
 {
   "compilerOptions": {
@@ -326,6 +329,7 @@ In our case, we enabled `strict` mode in our `tsconfig.json` file, so our code w
 
 Ok, let's make `languageProvider.tsx` type-safe:
 
+**languageProvider.tsx**
 ```typescript
 import React from "react"
 
@@ -396,6 +400,8 @@ Before we convert our other files, let's make our code a bit more robust.
 Right now, we can set our language to any language we want because we type it to any measly old string. As in `changeLanguage('banana')`. Let's be more strict by only allowing actual languages.
 
 Let's update `languageProvider.tsx`:
+
+**languageProvider.tsx**
 ```typescript
 import React from "react"
 
@@ -456,6 +462,8 @@ Ok great, now users who try to use `changeLanguage('apple')` should see a typesc
 Let's convert the rest of our files in `src` to typescript.
 
 `src/gatsby-browser.jsx` -> `src/gatsby-browser.tsx`
+
+**src/gatsby-browser.tsx**
 ```typescript
 import React from 'react'
 import { LanguageProvider } from './languageProvider';

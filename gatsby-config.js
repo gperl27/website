@@ -3,7 +3,7 @@ require("ts-node").register({ files: true })
 
 module.exports = {
   siteMetadata: {
-    title: `Greg's Dev Shed`,
+    title: `The Dev Shed`,
     author: `Greg Perlman`,
     description: `Greg Perlman's blog`,
     siteUrl: `https://gregperlman.dev`,
