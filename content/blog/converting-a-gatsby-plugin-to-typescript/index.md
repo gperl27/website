@@ -2,6 +2,7 @@
 title: Converting a Gatsby Plugin to Typescript
 date: 2019-05-23
 description: Making type-safe Gatsby plugins in a JavaScript world
+phase: live
 ---
 > Uncaught TypeError: Cannot read property 'welcomeToJavascript' of undefined 
 

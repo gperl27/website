@@ -15,10 +15,16 @@ export const createPages: GatsbyCreatePages = async ({
 }) => {
   const { createPage } = boundActionCreators
 
+  let filter = 'fileAbsolutePath: { regex: "/content/blog/" }'
+
+  if (process.env.NODE_ENV === "production") {
+    filter += '\nfrontmatter: { phase: { eq: "live" } }'
+  }
+
   const allMarkdown = await graphql(`
     {
       allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/blog/" } }
+        filter: { ${filter} }
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
       ) {

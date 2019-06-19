@@ -2,6 +2,7 @@
 title: Implementing Interfaces
 date: 2019-05-14
 description: Frontend is HARD
+phase: draft
 ---
 
 *Audience*
