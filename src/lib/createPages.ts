@@ -1,6 +1,5 @@
 import path from "path"
 import { GatsbyCreatePages } from "../types"
-import { getBlogIndexFilter } from "../utils/graphql"
 
 interface Post {
   node: {
@@ -19,7 +18,10 @@ export const createPages: GatsbyCreatePages = async ({
   const allMarkdown = await graphql(`
     {
       allMarkdownRemark(
-        filter: { ${getBlogIndexFilter()} }
+        filter: {
+          fileAbsolutePath: { regex: "/content/blog/" }
+          frontmatter: { phase: { eq: "live" } }
+        }
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
       ) {

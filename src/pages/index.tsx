@@ -6,7 +6,6 @@ import { Layout } from "../components/layout"
 import { FadeLink } from "../components/link"
 import { SEO } from "../components/seo"
 import { MarkdownRemark } from "../graphql-types"
-import { getBlogIndexFilter } from "../utils/graphql"
 import { rhythm, styledScale } from "../utils/typography"
 
 const StyledLink = styled(FadeLink)`
@@ -31,7 +30,10 @@ const BlogIndex = (props: Props) => {
         }
       }
       allMarkdownRemark(
-        filter: { ${getBlogIndexFilter()} }
+        filter: {
+          fileAbsolutePath: { regex: "/content/blog/" }
+          frontmatter: { phase: { eq: "live" } }
+        }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
