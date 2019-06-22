@@ -22,7 +22,7 @@ export const handler = async (event: any, context: Context) => {
     console.log("fetching colormind model")
     const response = await fetch("http://colormind.io/api/", {
       body: JSON.stringify({
-        input: [[255, 255, 255], "N", "N", "N", "N"],
+        input: ["N", "N", "N", "N", [255, 255, 255]],
         model: "default",
       }),
       method: "POST",
@@ -96,11 +96,11 @@ const transformPalette = (colormindResults: ColormindResponse): Palette => {
 
   // tslint:disable:object-literal-sort-keys
   return {
-    lightShades: data[0].toString(),
-    lightAccent: data[1].toString(),
+    lightShades: data[4].toString(),
+    lightAccent: data[3].toString(),
     mainBrand: data[2].toString(),
-    darkAccent: data[3].toString(),
-    darkShades: data[4].toString(),
+    darkAccent: data[1].toString(),
+    darkShades: data[0].toString(),
   }
   // tslint:enable:object-literal-sort-keys
 }
