@@ -8,6 +8,8 @@ import { sendText } from "./lib/twilio"
 // @ts-ignore
 global.fetch = fetch
 
+const PRIMARY_COLOR = [103, 158, 159]
+
 interface ColormindResponse {
   result: number[][]
 }
@@ -22,7 +24,7 @@ export const handler = async (event: any, context: Context) => {
     console.log("fetching colormind model")
     const response = await fetch("http://colormind.io/api/", {
       body: JSON.stringify({
-        input: ["N", "N", "N", "N", [255, 255, 255]],
+        input: ["N", "N", PRIMARY_COLOR, "N", "N"],
         model: "default",
       }),
       method: "POST",
