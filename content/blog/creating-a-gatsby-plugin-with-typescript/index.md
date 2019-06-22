@@ -22,7 +22,7 @@ If you've used JavaScript in any realm, you've seen this one way or another:
 
 Wouldn't it be fantastic if we could catch these bad boys before we even execute our program? 
 
-*Our pal Typescript can help.*
+*Welcome aboard, Typescript.*
 
 [Typescript](https://www.typescriptlang.org/) is a superset of JavaScript that will let us write our code in a type-safe way. Type-safety let's us know ahead of time if our code is correct or not. It gives us hope that we will not get an error like above at runtime. We also get a pretty smart compiler that will (in most cases) not even build our code if it sees us trying to access `null` or trying to reassign `burrito` to `42`. It's a tool that will help us catch and prevent bugs earlier and also provides nice documentation through the *interfaces* we write in our code.
 
@@ -586,7 +586,7 @@ A Gatsby project with Typescript would **not** be able to compile `languageConte
 
 We added a couple tools to our toolbox in this post. We created a Gatsby project, created a Gatsby plugin, and converted that plugin to Typescript. Not too shabby!
 
-You can find all the sample code [here](link) and please raise an issue if you run into any problems.
+You can find all the sample code [here](https://github.com/gperl27/creating-a-gatsby-plugin-using-typescript-example) and please raise an issue if you run into any problems.
 
 I think the Gatsby community would benefit greatly if more of their own internal api, plugins, and community plugins were backed by Typescript. We get reliable contracts to the code we write and consume, all of which promotes developer ergonomics and continuity.
     
