@@ -8,12 +8,14 @@ import {
 import { rhythm } from "./typography"
 
 export interface Theme extends DefaultTheme {
+  isDark?: boolean
   global: {
     bg: string
     color: string
     link: string
     linkHover: string
     inlineBgColor: string
+    hr?: string
   }
   code: {
     highlightCodeLineBg: string
@@ -29,6 +31,10 @@ enum ColorPalette {
   mainBrand = "140, 100, 88",
   darkAccent = "133, 129, 137",
   darkShades = "32, 30, 32",
+
+  lightYellow = "255,229,100",
+  darkYellow = "#FFDE6B",
+  lightGrey = "#575D61",
 
   success = "95, 153, 81",
   warning = "221, 136, 25",
@@ -60,9 +66,8 @@ const baseTheme = {
     warning: ColorPalette.warning,
   },
   code: {
-    highlightCodeLineBg: "#575D61",
-    highlightLineBorderLeftColor: "#FFDE6B",
-    inlineBgColor: "255,229,100,0.2",
+    highlightCodeLineBg: ColorPalette.lightGrey,
+    highlightLineBorderLeftColor: ColorPalette.darkYellow,
   },
   palette,
 }
@@ -72,7 +77,8 @@ export const darkTheme: Theme = {
   global: {
     bg: palette.darkShades,
     color: palette.lightShades,
-    inlineBgColor: "82,174,160,0.7",
+    hr: ColorPalette.lightGrey,
+    inlineBgColor: ColorPalette.lightGrey,
     link: palette.mainBrand,
     linkHover: palette.lightAccent,
   },
@@ -83,7 +89,7 @@ export const lightTheme: Theme = {
   global: {
     bg: palette.lightShades,
     color: palette.darkShades,
-    inlineBgColor: "255,229,100,0.2",
+    inlineBgColor: ColorPalette.lightYellow,
     link: palette.mainBrand,
     linkHover: palette.darkAccent,
   },
@@ -103,6 +109,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   a {
     color: rgb(${props => props.theme.global.link});
+  }
+  
+  hr {
+   background-color: ${props => props.theme.isDark && props.theme.global.hr};
   }
   
   a:hover {
@@ -125,7 +135,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   .language-text {
     font-size: ${rhythm(0.65)} !important; 
-    background: rgba(${props => props.theme.global.inlineBgColor}) !important;
+    background: ${props =>
+      props.theme.isDark
+        ? props.theme.global.inlineBgColor
+        : `rgba(${props.theme.global.inlineBgColor}, 0.2)`} !important;
     color: rgb(${props => props.theme.global.color}) !important;
   }
   
