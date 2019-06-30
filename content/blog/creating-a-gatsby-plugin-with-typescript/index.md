@@ -4,29 +4,29 @@ date: 2019-06-29
 description: Making type-safe Gatsby plugins in a JavaScript world
 phase: live
 ---
-In aiming to convert my own Gatsby plugin to TypeScript, I struggled looking for Gatsby plugins that had TypeScript support (mostly checking the sourcecode) to serve as reference.
+In aiming to convert my own Gatsby plugin to use Typescript, I struggled looking for "the right way" to incorporate it - I was mostly checking the sourcecode of official and popular plugin repos.
 
-For those of you with similar toils, look no further. We'll walk through step-by-step on creating a simple Gatsby project, creating our own local plugin for Gatsby, and then converting that plugin to use Typescript.
+For those of you with similar toils, look no further. We'll walk through step-by-step in creating a simple Gatsby project, creating our own local plugin for Gatsby, and then converting that plugin to use Typescript.
 
 We're in neither [East nor West Egg](https://en.wikipedia.org/wiki/The_Great_Gatsby) here. I'm talking about [Gatsby](https://www.gatsbyjs.org/) - a framework for statically built websites.
 
-What does it mean for a website to be *static*? A static sites renders `page1.html, page2.html, page3.html` **separately** versus something like `myHipsterTrendingSPA.html` that injects a javascript application on **one single page**. I like to associate a static website with semantic HTML. As in `<a href="/page2.html">Go to page</a>` will, in fact, direct you to that file's location on your server.
+What does it mean for a website to be *static*? A static sites serves up `page1.html, page2.html, page3.html` **separately** versus something like `myHipsterTrendingSPA.html` that injects a Javascript application on **one single page**. I like to associate a static website with semantic HTML. As in `<a href="/page2.html">Go to page 2</a>` will, in fact, direct you to that file's location on your server.
 
-Ok, before you go Tweeting out to the world that all Gatsby is is a web server, there are some niceties that come with using it. Gatsby let's you write JavaScript, specifically [React](https://reactjs.org/), to create your static pages. Additionally, you get a rich plugin ecosystem, the capacity to use your fancy bundlers and loaders (like [webpack](https://webpack.js.org/)), and excellent documentation. It also harnesses [GraphQL](https://graphql.org/) to do some neat work behind the scenes to talk to databases and other servers or file parsing (we won't encounter this in our project). Simply, it allows you to focus on solving your problems at hand, whether it's a CMS or a blog. 
+Gatsby lets you write Javascript, specifically [React](https://reactjs.org/), to create your static pages. Additionally, you get a rich plugin ecosystem, the capacity to use your fancy bundlers and loaders (like [webpack](https://webpack.js.org/)), and excellent documentation. It also harnesses [GraphQL](https://graphql.org/) to do some neat work behind the scenes to talk to databases and other servers or file parsing (we won't dabble into this in our project). Simply, it allows you to focus on solving the problems at hand, whether it's a CMS or a blog. 
 
-I mentioned we'll be using Typescript in our Gatsby project. What's that all about?
+Now let's talk about using Typescript in our Gatsby project. What's the big deal?
 
-If you've used JavaScript in any realm, you've seen this one way or another:
+If you've used Javascript in any realm, you've seen this one way or another:
 
 > Uncaught TypeError: Cannot read property 'welcomeToJavascript' of undefined 
 
-What if we could prevent our eyes from seeing such obscenities?
+What if we could prevent our eyes from seeing such horrors?
 
-**Typescript can be our hero.**
+**Typescript to the rescue.**
 
-[Typescript](https://www.typescriptlang.org/) is a superset of JavaScript that lets us write our code in a type-safe way.
+[Typescript](https://www.typescriptlang.org/) is a superset of Javascript that lets us write our code in a type-safe way.
 
- Type-safety let's us know ahead of time if our code is correct or not. It gives us hope that we will not get an error like above at runtime. We also get a pretty smart compiler that will (in most cases) not even build our code if it sees us trying to access `null` or trying to reassign `"burrito"` to `42`. It's a tool that will help us catch and prevent bugs earlier and also provides nice documentation through the **interfaces** we write in our code.
+ Type-safety let's us know ahead of time if our code is correct or not. It gives us hope that we will not get an error like the one above at runtime. We also get a pretty smart compiler that will (in most cases) not even build our code if it sees us trying to access `null` or trying to reassign `"burrito"` to `42`. It's a tool that will help us catch and prevent bugs earlier and also provides nice documentation through the **interfaces** we write in our code.
 
 ## Let's Build
 
@@ -49,7 +49,7 @@ First, let's clone down a gatsby starter repo. We'll use the default starter.
 
 `$ git clone https://github.com/gatsbyjs/gatsby-starter-default.git gatsby-site`
 
-Let's change into the directory we made and make sure everything is up and running:
+Let's change into the directory and make sure everything is up and running:
 
 `$ cd gatsby-site`
 
@@ -65,7 +65,7 @@ Not too bad, right?
 
 We're ready to build a plugin for our site. Just as it sounds, Gatsby plugins let us add cool little features to our site without encumbering our main code. 
 
-We'll put our plugin in a folder called `plugins` inside our gatsby project. 
+We'll put our plugin in a folder called `plugins` inside our Gatsby project. 
 
 We're going to create  **gatsby-language-chooser-plugin**. This plugin allows us to access a language, as well as update it, at any time. It makes use of React's [context](https://reactjs.org/docs/context.html) api and Gatsby's [wrapRootElement](https://www.gatsbyjs.org/docs/browser-apis/#wrapRootElement) api.
 
@@ -94,9 +94,9 @@ Initialize an npm package by running:
 
 You can hit enter for everything to get all the defaults or feel free to get fancy.
 
-In our plugin, we'll write our source code in `/src` and compile the files into vanilla JavaScript at the root so the Gatsby plugin reconciler can find them. 
+In our plugin, we'll write our source code in `/src` and compile the files into vanilla Javascript at the root so the Gatsby plugin reconciler can find them. 
 
-Using a JavaScript transpiler/compiler is **optional**; you can very well write vanilla JavaScript directly at the root level of the plugin folder.
+Using a Javascript transpiler/compiler is **optional**; you can very well write vanilla Javascript directly at the root level of the plugin folder.
 
 Ok, let's write some code.
 
@@ -124,7 +124,7 @@ export const LanguageProvider = (props) => {
 };
 ```
 
-Here, we expose a *provider* that manages the `language` of our application and the `changeLanguage` function that allows us to change the language to whatever string we pass it - as in `changeLanguage('Spanish')`. 
+Here, we expose a *provider* that manages the `language` of our application and the `changeLanguage` function that allows us to change the language to whatever *string* we pass it - as in `changeLanguage('Spanish')`. 
 
 **src/gatsby-browser.jsx**
 ```jsx
@@ -137,7 +137,7 @@ export const wrapRootElement = ({element}) => (
     </LanguageProvider>
 );
 ```
-We'll utilize a Gatsby-specific API `wrapRootElement` to wrap our application with our `LanguageProvider`. This means our Gatsby app will have access to our language API at any given point. Perfect for showing the ability to toggle the language in a footer or header at any point on our website.
+We'll utilize a Gatsby-specific API `wrapRootElement` to wrap our application with our `LanguageProvider`. This means our Gatsby app will have access to our language API at any given point - perfect for showing the ability to toggle the language in a footer or header at any point on our website.
 
 **src/index.js**
 ```javascript
@@ -147,12 +147,12 @@ export {
   LanguageContext
 }
 ```
-We'll need a way to actually use our context in our app. So, we'll expose the `LanguageContext` in an `index` file.
+We'll need a way to actually use the context in our app. So, we'll expose the `LanguageContext` in an `index` file.
 
 ---
 In order for Gatsby to understand our plugin, we'll need to do two things:
 
-1. Compile our `es6` JavaScript into plain, vanilla JavaScript.
+1. Compile our `es6` Javascript into plain, vanilla Javascript.
 2. Specify where the files will go.
 
 We can setup [Babel](https://babeljs.io/) to do both of these things. First let's install some packages:
@@ -208,9 +208,9 @@ Your directory should now look like this:
 - gatsby-browser.js
 ```
 
----
-
 Our plugin is in tip-top shape. Let's hook it up to our Gatsby project.
+
+---
 
 First, change back into the root of our Gatsby project:
 
@@ -223,7 +223,7 @@ You should have a `gatsby-config.js`; let's open it up.
 module.exports = {
   plugins: [
      // highlight-start
-     // notice the name is the same as our package in the plugin folder 
+     // notice the name is the same as our package in the plugins folder 
      // Gatsby under the hood is utilizing our packages in /plugins by their names and registers them along with all the other plugins that we have installed
      `gatsby-language-chooser-plugin`
      // highlight-end
@@ -233,7 +233,7 @@ module.exports = {
 
 And now our plugin is automagically ready to use.
 
-To let it do its thing, let's replace all the code in our landing page with a simple interface.
+To let it do its thing, let's replace all the code in our landing page with a simple ui that utilizes our plugin.
  
 This page will do two things:
 
@@ -309,7 +309,7 @@ Navigate to your browser and you should see our plugin working its magic:
 
 ---
 
-And that's it! Our application now can track across all its pages what language we're using thanks to our plugin. The developer doesn't have to manage any of the state or functionality.
+And that's it! Our application now can track across all of its pages what language we're using thanks to our plugin. The developer doesn't have to manage any of the state or functionality.
 
 ## The Conversion
 
@@ -378,9 +378,9 @@ You can learn more about `tsconfig` files [here](https://www.typescriptlang.org/
 
 Typescript looks to compile all `.ts` and also `.tsx` (since we specified `"jsx: react"` in *tsconfig.json*) files. So let's convert our existing `.js` and `.jsx` files into `.ts` and `.tsx`.
 
-Change `src/languageProvider.jsx` to `src/languageProvider.tsx`
+Change `src/languageProvider.jsx` to `src/languageProvider.tsx`.
 
-If you're using an IDE like WebStorm or Visual Studio, you'll probably already start to see a ton of Typescript errors (stuff highlighted or underlined in red). Don't fret! This is actually a very good thing. We're getting told our code isn't *type-safe*. This means we might encounter `null` or `undefined` at runtime like we talked about at the very beginning; this let's us know that our app will probably misbehave at runtime.
+If you're using an IDE like WebStorm or Visual Studio, you'll probably already start to see a ton of Typescript errors (stuff highlighted or underlined in red). Don't fret! This is actually a very good thing. We're getting told our code isn't *type-safe*. This means we might encounter `null` or `undefined` at runtime like we talked about at the very beginning. It's not a friendly user experience if our app misbehaves.
 
 In our case, we enabled `strict` mode in our `tsconfig.json` file, so our code won't even compile until we fix all the Typescript errors. This is awesome because this let's us squash bugs before the code executes in the browser.
 
@@ -496,17 +496,17 @@ $ tsc -b
 
 You'll see we now have a `languageProvider.js` file in the root directory, just as we did before, which is excellent because our plugin's api should work just the same as it did before. You'll also notice we have some `.map` files and a `.d.ts` file. 
 
-The map files are sourcemaps, which we enabled in our `tsconfig` file. Sourcemaps help us and other developers debug and trace problems in our code, as it allows us to read the human-readable authoring rather than the processed, jarbled code (thanks to babel and now Typescript).
+The map files are sourcemaps, which we enabled in our `tsconfig` file. Sourcemaps help us and other developers debug and trace problems in our code, as it allows us to read the human-readable authoring rather than the processed, jarbled code (created by Babel and now Typescript).
 
-The `.d.ts` are Typescript definition files. These let us communicate the shapes and contracts of our code. Type definition files are extremely useful for using other people's packages. 
+The `.d.ts` are Typescript definition files. These let us communicate the shapes and contracts of our code. Type definition files are extremely useful for using other people's packages as well as distributing our own. 
 
-For example, if someone were to use our plugin and had Typescript installed, they would get access to typehints in their editor, as well as compiler checks. Invoking say, `changeLanguage(10)` would make the compiler weep.
+For example, if someone were to use our plugin and had Typescript installed, they would get access to type-hints in their editor, as well as compiler checks. Invoking `changeLanguage(10)` would make the compiler weep.
 
 ---
 
 Before we convert our other files, I think we have an opportunity to make our code a bit more robust. 
 
-Right now, we can set our language to any language we want because we type it to any measly old string - as in `changeLanguage('banana')`. Let's be more strict by only allowing actual languages.
+Right now, we can set our language to any language we want because we type it to any measly old *string* - as in `changeLanguage('banana')`. Let's be more strict by only allowing actual languages.
 
 Let's update `languageProvider.tsx`:
 
@@ -578,11 +578,11 @@ $ tsc -b
 ✨  Done in 5.67s.
 ```
 
-Excellent! Users who try to use `changeLanguage('apple')` should see a typescript error now.
+Excellent! Users who try to use `changeLanguage('apple')` should see a Typescript error now.
 
 ---
 
-Let's convert the rest of our files in `src` to typescript.
+Let's convert the rest of our files in `src` to Typescript.
 
 `src/gatsby-browser.jsx` to `src/gatsby-browser.tsx`
 
@@ -613,7 +613,7 @@ Let's run one more `$ yarn build` and you should now see all the `*.map` and `.d
 
 ## The Plan Comes Together
 
-The moment of truth. Our plugin is now type-safe and is compiled down to vanilla JavaScript. Let's make sure it still works. 
+The moment of truth. Our plugin is now type-safe and is compiled down to vanilla Javascript. Let's make sure it still works. 
 
 Navigate back to the root of our gatsby project and run `$ yarn develop`.
 
@@ -629,5 +629,6 @@ We accomplished *a lot* in this post: we created a Gatsby project, created a Gat
 
 You can find all the sample code [here](https://github.com/gperl27/creating-a-gatsby-plugin-using-typescript-example) and please raise an issue if you run into any problems.
 
-I think the Gatsby community would benefit greatly if more of their own internal api, plugins, and community plugins were backed by Typescript. We get reliable contracts to the code we write and consume, all of which promotes developer ergonomics and continuity.
-    
+The Gatsby community would greatly benefit if more of their own internal api, plugins, and community plugins were backed by Typescript. Though there are type definition files for some packages, many are vague or incomplete. A Typescript-infused Gatsby ecosystem would evoke increased maintainability, ergonomics, and consistency over the long-run.  
+
+**Gatsby is *great*; Gatsby backed *fully* by Typescript would be *greater*.**
