@@ -89,7 +89,7 @@ export const lightTheme: Theme = {
   global: {
     bg: palette.lightShades,
     color: palette.darkShades,
-    inlineBgColor: ColorPalette.lightYellow,
+    inlineBgColor: ColorPalette.lightGrey,
     link: palette.mainBrand,
     linkHover: palette.darkAccent,
   },
@@ -135,11 +135,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   .language-text {
     font-size: ${rhythm(0.65)} !important; 
-    background: ${props =>
+    background: ${props => props.theme.global.inlineBgColor} !important;
+    color: rgb(${props =>
       props.theme.isDark
-        ? props.theme.global.inlineBgColor
-        : `rgba(${props.theme.global.inlineBgColor}, 0.2)`} !important;
-    color: rgb(${props => props.theme.global.color}) !important;
+        ? props.theme.global.color
+        : props.theme.palette.lightShades}) !important;
   }
   
   .gatsby-highlight > pre {
