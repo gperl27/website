@@ -26,11 +26,11 @@ export interface Theme extends DefaultTheme {
 }
 
 enum ColorPalette {
-  lightShades = "242, 242, 241",
-  lightAccent = "139, 142, 149",
-  mainBrand = "140, 100, 88",
-  darkAccent = "133, 129, 137",
-  darkShades = "32, 30, 32",
+  lightShades = "245, 242, 232",
+  lightAccent = "109, 214, 243",
+  mainBrand = "92, 193, 192",
+  darkAccent = "172, 126, 152",
+  darkShades = "36, 57, 79",
 
   lightYellow = "255,229,100",
   darkYellow = "#FFDE6B",
@@ -89,7 +89,7 @@ export const lightTheme: Theme = {
   global: {
     bg: palette.lightShades,
     color: palette.darkShades,
-    inlineBgColor: ColorPalette.lightGrey,
+    inlineBgColor: ColorPalette.lightYellow,
     link: palette.mainBrand,
     linkHover: palette.darkAccent,
   },
@@ -135,11 +135,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   .language-text {
     font-size: ${rhythm(0.65)} !important; 
-    background: ${props => props.theme.global.inlineBgColor} !important;
-    color: rgb(${props =>
+    background: ${props =>
       props.theme.isDark
-        ? props.theme.global.color
-        : props.theme.palette.lightShades}) !important;
+        ? props.theme.global.inlineBgColor
+        : `rgba(${props.theme.global.inlineBgColor}, 0.2)`} !important;
+    color: rgb(${props => props.theme.global.color}) !important;
   }
   
   .gatsby-highlight > pre {
