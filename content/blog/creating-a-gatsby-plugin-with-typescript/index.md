@@ -3,6 +3,7 @@ title: Creating a Gatsby Plugin With Typescript
 date: 2019-06-29
 description: Making type-safe Gatsby plugins in a JavaScript world
 phase: live
+keywords: ["gatsby", "typescript", "react", "gatsby plugin", "tutorial", "frontend", "web development"]
 ---
 In aiming to convert my own Gatsby plugin to use Typescript, I struggled looking for "the right way" to incorporate it - I was mostly checking the sourcecode of official and popular plugin repos.
 
