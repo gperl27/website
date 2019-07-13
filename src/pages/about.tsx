@@ -31,6 +31,7 @@ const About = (props: Props) => {
       <SEO
         title="About Me"
         keywords={[`about`, `mantra`, `personal`, `programming`]}
+        slug={props.pageContext.slug}
       />
       <div>
         <AboutMe>

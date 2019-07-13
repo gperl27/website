@@ -26,6 +26,7 @@ const BlogIndex = (props: Props) => {
     query {
       site {
         siteMetadata {
+          author
           title
         }
       }
@@ -54,18 +55,17 @@ const BlogIndex = (props: Props) => {
   `)
 
   const siteTitle = data.site.siteMetadata.title
+  const author = data.site.siteMetadata.author
   const posts = data.allMarkdownRemark.edges
 
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
-        title="All posts"
+        title={`A blog by ${author}`}
         keywords={[`blog`, `javascript`, `react`, `web development`, `gatsby`]}
       />
       <Bio />
       {posts.map(({ node }: { node: MarkdownRemark }) => {
-        // console.log(node, 'NODE')
-
         const frontmatter = node!.frontmatter!
         const fields = node!.fields!
         const slug = fields.slug!

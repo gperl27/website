@@ -10,13 +10,17 @@ import { RangeSlider } from "../components/common/Slider"
 import { TextArea } from "../components/common/TextArea"
 import { TextInput } from "../components/common/TextInput"
 import { Layout } from "../components/layout"
+import { SEO } from "../components/seo"
+import { SitePageContext } from "../graphql-types"
 import { rhythm, styledScale } from "../utils/typography"
 
 const DEFAULT_SALARY_RANGE = [140, 250]
 const DEFAULT_TIMELINE_RANGE = [3, 12]
 const DEFAULT_BUDGET_RANGE = [25, 100]
 
-type Props = PageRendererProps
+interface Props extends PageRendererProps {
+  pageContext: SitePageContext
+}
 
 type PersonType = "recruiter" | "entrepreneur"
 
@@ -282,6 +286,11 @@ export const Contact = (props: Props) => {
 
   return (
     <Layout location={props.location} title={"Greg Perlman"}>
+      <SEO
+        title="Contact Me"
+        keywords={[`contact`, `recruiter`, `entrepreneur`]}
+        slug={props.pageContext.slug}
+      />
       <h3>About You</h3>
       <form
         name="contact"

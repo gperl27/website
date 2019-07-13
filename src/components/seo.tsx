@@ -20,29 +20,42 @@ interface Props {
   meta?: Meta[]
   keywords?: string[]
   description?: string
+  image?: string
+  slug?: string | null
 }
 
 export const SEO = (props: Props) => {
   const lang = props.lang || "en"
   const meta = props.meta || []
   const keywords = props.keywords || []
-  const description = props.description || ""
 
-  const { site } = useStaticQuery(
+  const { avatar, site } = useStaticQuery(
     graphql`
       query {
+        avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+          childImageSharp {
+            fixed(width: 50, height: 50) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
         site {
           siteMetadata {
             title
             description
             author
+            siteUrl
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = props.description || site.siteMetadata.description
+  const image = props.image || avatar.childImageSharp.fixed
+  const url = props.slug
+    ? `${site.siteMetadata.siteUrl}/${props.slug}/`
+    : site.siteMetadata.siteUrl
 
   return (
     <Helmet
@@ -69,6 +82,14 @@ export const SEO = (props: Props) => {
           property: `og:type`,
         },
         {
+          content: url,
+          property: `og:url`,
+        },
+        {
+          content: image,
+          name: "image",
+        },
+        {
           content: `summary`,
           name: `twitter:card`,
         },
@@ -85,14 +106,7 @@ export const SEO = (props: Props) => {
           name: `twitter:description`,
         },
       ]
-        .concat(
-          keywords.length > 0
-            ? {
-                content: keywords.join(`, `),
-                name: `keywords`,
-              }
-            : []
-        )
+        .concat({ content: keywords.join(`, `), name: `keywords` })
         .concat(meta)}
     />
   )

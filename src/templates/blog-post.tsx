@@ -43,13 +43,15 @@ const BlogPostTemplate = (props: Props) => {
   const frontmatter = post.frontmatter!
   const html = post.html!
   const siteTitle = data.site!.siteMetadata!.title!
-  const { previous, next } = props.pageContext
+  const { previous, next, slug } = props.pageContext
 
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
         title={frontmatter.title!}
         description={frontmatter.description || excerpt}
+        slug={slug}
+        keywords={frontmatter.keywords}
       />
       <Heading>{post.frontmatter!.title}</Heading>
       <Date>{frontmatter.date}</Date>
@@ -93,6 +95,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        keywords
       }
     }
   }
