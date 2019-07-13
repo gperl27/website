@@ -101,6 +101,7 @@ module.exports = {
         dark: require(`${__dirname}/src/utils/theme.ts`).darkTheme,
       },
     },
+    `gatsby-plugin-sitemap`
   ],
   developMiddleware: app => {
     app.use(
