@@ -1,10 +1,6 @@
 const proxy = require("http-proxy-middleware")
 require("ts-node").register({ files: true })
 
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
-
 module.exports = {
   siteMetadata: {
     title: `The Dev Shed`,

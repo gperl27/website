@@ -165,9 +165,9 @@ const Resume = () => {
   const { github, linkedIn } = data.site.siteMetadata.social
   const githubUrl = `github.com/${github}`
   const linkedInUrl = `linkedin.com/in/${linkedIn}`
-  const email = process.env.EMAIL || ""
-  const phone = process.env.PHONE || ""
-  const address = process.env.ADDRESS || ""
+  const email = process.env.GATSBY_EMAIL || ""
+  const phone = process.env.GATSBY_PHONE || ""
+  const address = process.env.GATSBY_ADDRESS || ""
 
   return (
     <>
