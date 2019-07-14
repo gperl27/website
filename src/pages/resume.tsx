@@ -1,19 +1,24 @@
-import { PageRendererProps } from "gatsby"
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import {
+  faEnvelope,
+  faMapMarkerAlt,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import { Query, SitePageContext } from "../graphql-types"
+import education from "../../content/resume/education.json"
+import experiences from "../../content/resume/experience.json"
+import skills from "../../content/resume/skills.json"
+import summary from "../../content/resume/summary.json"
 import { rhythm } from "../utils/typography"
-
-interface Props extends PageRendererProps {
-  pageContext: SitePageContext
-  data: Query
-}
 
 const Container = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding: ${`${rhythm(1)}`};
+  padding: ${rhythm(1)};
   max-width: ${rhythm(36)};
 `
 
@@ -23,7 +28,7 @@ const ResumeContainer = styled.div`
 
 const LeftSide = styled.div`
   padding-right: ${rhythm(1)};
-  border-right: 1px solid black;
+  border-right: 1px solid rgba(${props => props.theme.palette.mainBrand}, 0.2);
   flex: 3;
 `
 
@@ -32,58 +37,188 @@ const RightSide = styled.div`
   flex: 1;
 `
 
-const Resume = (props: Props) => {
+const Jumbotron = styled.div`
+  text-align: center;
+  padding: ${rhythm(4)};
+  background: rgb(${props => props.theme.palette.mainBrand});
+  color: rgb(${props => props.theme.palette.lightShades});
+  margin: 0 auto ${rhythm(1)};
+`
+
+const JumboName = styled.h1`
+  padding: 0;
+  margin: 0;
+  font-family: Montserrat, serif;
+`
+
+const Title = styled.h2`
+  font-family: Montserrat, serif;
+`
+
+const EducationTitle = styled.h5`
+  margin-bottom: ${rhythm(0.25)};
+`
+
+const EducationDescription = styled.p`
+  font-size: ${rhythm(0.5)};
+`
+
+const SkillListItem = styled.li`
+  font-size: ${rhythm(0.6)};
+  list-style-type: circle;
+`
+
+const ExperienceAccomplishmentListItem = styled.li`
+  font-size: ${rhythm(0.6)};
+`
+
+const ExperienceCompanyHeader = styled.h4`
+  margin-bottom: ${rhythm(0.25)};
+`
+
+const ContactList = styled.ul`
+  margin-left: 0;
+`
+
+const ContactListItem = styled.li`
+  font-size: ${rhythm(0.6)};
+  list-style-type: none;
+  white-space: nowrap;
+`
+
+const ContactListIcon = styled(FontAwesomeIcon)`
+  margin-right: ${rhythm(0.5)};
+  margin-left: ${rhythm(0.25)};
+`
+
+const ContactListLink = styled.a`
+  color: black;
+  &:hover {
+    color: rgb(${props => props.theme.palette.mainBrand});
+  }
+`
+
+const Experiences = experiences.map(experience => {
   return (
-    <Container>
-      <h1>Greg Perlman</h1>
-      <h2>gregperlman.dev</h2>
-      <hr />
-      <ResumeContainer>
-        <LeftSide>
-          <h2>Summary</h2>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum
-          </p>
-          <h2>Experience</h2>
-          <h3>Software Engineer</h3>
-          <h4>
-            <em>Boca Raton, FL 2016 - Present</em>
-          </h4>
-          <ul>
-            <li>Blaralsdkfj asdlfkjasdflk as;lkfjasldkfj</li>
-            <li>Blaralsdkfj asdlfkjasdflk as;lkfjasldkfj</li>
-            <li>Blaralsdkfj asdlfkjasdflk as;lkfjasldkfj</li>
-          </ul>
-        </LeftSide>
-        <RightSide>
-          <ul>
-            <li>email</li>
-            <li>phone</li>
-            <li>Delray Beach, FL</li>
-            <li>linkedin</li>
-            <li>github</li>
-          </ul>
-          <h2>Skills</h2>
-          <h5>Expert</h5>
-          <ul>
-            <li>javascript</li>
-            <li>typescript</li>
-            <li>node</li>
-            <li>laravel</li>
-          </ul>
-          <h2>Education</h2>
-          <h3>Digital Media Studies</h3>
-        </RightSide>
-      </ResumeContainer>
-    </Container>
+    <span key={experience.name}>
+      <h3>{experience.title}</h3>
+      <ExperienceCompanyHeader>
+        <em>
+          {experience.name} - {experience.location}
+        </em>
+      </ExperienceCompanyHeader>
+      <h4>
+        <em>
+          {experience.from} - {experience.to}
+        </em>
+      </h4>
+      <ul>
+        {experience.accomplishments.map(accomplishment => (
+          <ExperienceAccomplishmentListItem key={accomplishment}>
+            {accomplishment}
+          </ExperienceAccomplishmentListItem>
+        ))}
+      </ul>
+    </span>
+  )
+})
+
+const Skills = skills.map(skill => {
+  return (
+    <span key={skill.title}>
+      <h4>
+        <em>{skill.title}</em>
+      </h4>
+      <ul>
+        {skill.items.map(item => (
+          <SkillListItem key={item}>{item}</SkillListItem>
+        ))}
+      </ul>
+    </span>
+  )
+})
+
+const Education = education.map(edu => {
+  return (
+    <span key={edu.name}>
+      <EducationTitle>{edu.name}</EducationTitle>
+      <EducationDescription>{edu.description}</EducationDescription>
+    </span>
+  )
+})
+
+const Resume = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          author
+          social {
+            linkedIn
+            github
+          }
+        }
+      }
+    }
+  `)
+
+  const { github, linkedIn } = data.site.siteMetadata.social
+  const githubUrl = `github.com/${github}`
+  const linkedInUrl = `linkedin.com/in/${linkedIn}`
+  const email = process.env.email || ""
+  const phone = process.env.phone || ""
+
+  return (
+    <>
+      <Jumbotron>
+        <JumboName>{data.site.siteMetadata.author}</JumboName>
+      </Jumbotron>
+      <Container>
+        <ResumeContainer>
+          <LeftSide>
+            <Title>Summary</Title>
+            <p>{summary.summary}</p>
+            <Title>Experience</Title>
+            {Experiences}
+          </LeftSide>
+          <RightSide>
+            <Title>Contact</Title>
+            <ContactList>
+              <ContactListItem>
+                <ContactListIcon icon={faEnvelope} />
+                <ContactListLink href={`mailto:${email}`}>
+                  {email}
+                </ContactListLink>
+              </ContactListItem>
+              <ContactListItem>
+                <ContactListIcon icon={faPhone} />
+                <ContactListLink href={`tel:${phone}`}>{phone}</ContactListLink>
+              </ContactListItem>
+              <ContactListItem>
+                <ContactListIcon icon={faMapMarkerAlt} />
+                Delray Beach, FL
+              </ContactListItem>
+              <ContactListItem>
+                <ContactListIcon icon={faLinkedin} />
+                <ContactListLink href={`https://${linkedInUrl}`}>
+                  {linkedInUrl}
+                </ContactListLink>
+              </ContactListItem>
+              <ContactListItem>
+                <ContactListIcon icon={faGithub} />
+                <ContactListLink href={`https://${githubUrl}`}>
+                  {githubUrl}
+                </ContactListLink>
+              </ContactListItem>
+            </ContactList>
+            <Title>Skills</Title>
+            {Skills}
+            <Title>Education</Title>
+            {Education}
+          </RightSide>
+        </ResumeContainer>
+      </Container>
+    </>
   )
 }
 

@@ -23,7 +23,8 @@
       "./node_modules/@types",
       "./src/index.d.ts"
     ],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./src/**/*",

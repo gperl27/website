@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Expert",
+    "items": [
+      "React",
+      "Javascript",
+      "Typescript",
+      "Node",
+      "Laravel"
+    ]
+  },
+  {
+    "title": "Recreational",
+    "items": [
+      "Kotlin",
+      "Rust",
+      "Elm",
+      "Elixir"
+    ]
+  }
+]
