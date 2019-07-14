@@ -51,10 +51,7 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              // noInlineHighlight: true,
-            }
+            resolve: `gatsby-remark-prismjs`
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
@@ -73,13 +70,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Greg Perlman's Blog`,
+        short_name: `The Dev Shed`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#5CC1C0`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/favicon.png`,
       },
     },
     `gatsby-plugin-offline`,
