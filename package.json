@@ -76,7 +76,6 @@
     "@types/styled-react-modal": "^1.1.1",
     "@types/twilio": "^0.0.10",
     "@types/typography": "^0.16.2",
-    "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
     "graphql": "^14.2.1",
     "prettier": "^1.17.0",
