@@ -9,6 +9,7 @@ module.exports = {
     siteUrl: `https://gregperlman.dev`,
     social: {
       github: `gperl27`,
+      linkedIn: `gregperlman`
     },
   },
   plugins: [
