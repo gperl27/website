@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-brands-svg-icons": "latest",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "aws-lambda": "^0.1.2",
@@ -54,8 +55,7 @@
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.54",
     "typography": "^0.16.19",
-    "typography-theme-alton": "^0.16.19",
-    "@fortawesome/free-brands-svg-icons": "latest"
+    "typography-theme-alton": "^0.16.19"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -76,6 +76,7 @@
     "@types/styled-react-modal": "^1.1.1",
     "@types/twilio": "^0.0.10",
     "@types/typography": "^0.16.2",
+    "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
     "graphql": "^14.2.1",
     "prettier": "^1.17.0",
