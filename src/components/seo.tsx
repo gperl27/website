@@ -54,7 +54,7 @@ export const SEO = (props: Props) => {
   const metaDescription = props.description || site.siteMetadata.description
   const image =
     props.image ||
-    `${site.siteMetadata.siteUrl}/${avatar.childImageSharp.fixed.url}`
+    `${site.siteMetadata.siteUrl}/${avatar.childImageSharp.fixed.src}`
 
   const url = props.slug
     ? `${site.siteMetadata.siteUrl}/${props.slug}/`
