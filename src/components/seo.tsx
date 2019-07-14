@@ -87,7 +87,7 @@ export const SEO = (props: Props) => {
         },
         {
           content: image,
-          name: "image",
+          name: "og:image",
         },
         {
           content: `summary`,
