@@ -165,8 +165,9 @@ const Resume = () => {
   const { github, linkedIn } = data.site.siteMetadata.social
   const githubUrl = `github.com/${github}`
   const linkedInUrl = `linkedin.com/in/${linkedIn}`
-  const email = process.env.email || ""
-  const phone = process.env.phone || ""
+  const email = process.env.EMAIL || ""
+  const phone = process.env.PHONE || ""
+  const address = process.env.ADDRESS || ""
 
   return (
     <>
@@ -196,7 +197,7 @@ const Resume = () => {
               </ContactListItem>
               <ContactListItem>
                 <ContactListIcon icon={faMapMarkerAlt} />
-                Delray Beach, FL
+                {address}
               </ContactListItem>
               <ContactListItem>
                 <ContactListIcon icon={faLinkedin} />
