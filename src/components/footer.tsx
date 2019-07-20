@@ -41,6 +41,7 @@ export const Footer = () => {
 
   return (
     <StyledFooter>
+      <StyledLink to={`/`}>blog</StyledLink>
       <StyledLink to={`/about`}>about</StyledLink>
       <StyledLink to={`/contact`}>inquiries</StyledLink>
       <StyledAnchor
