@@ -1,12 +1,26 @@
 [
   {
+    "location": "Boston, MA",
+    "from": "October 2019",
+    "to": "Present",
+    "name": "Wells Fargo",
+    "title": "Senior Software Engineer",
+    "accomplishments": [
+      "Appointed UI team lead and codeowner for multiple projects",
+      "Introduced advanced testing tools to increase overall team productivity",
+      "Identified as the testing expert on staff",
+      "Played integral role in hiring process and decisions",
+      "Mentored new hires and established an improved onboarding process"
+    ]
+  },
+  {
     "location": "Boca Raton, FL",
     "from": "July 2018",
-    "to": "Present",
+    "to": "October 2019",
     "name": "FlexShopper",
     "title": "Software Engineer II",
     "accomplishments": [
-      "Built and maintained consumer-facing payment plugin using Typescript and React",
+      "Built consumer-facing payment plugin using Typescript and React",
       "Played integral role in orchestrating geolocation services into company app",
       "Completely rewrote archaic Customer Service platform's front and backend using React and Node",
       "Engaged in frequent code reviews and employed highest code standards with a strong sense of project ownership",
@@ -20,10 +34,9 @@
     "name": "Nebular Design, LLC",
     "title": "Lead Software Engineer",
     "accomplishments": [
-      "Helped new startup exhibit over 30% month-over-month growth after being the first developer hired",
-      "Lead development team in interim as CTO made sudden departure for six months",
-      "Ran development workshops to promote code standards and team cohesion",
-      "Delivered high-quality products to clients with strict deadlines in parallel with multiple other projects"
+      "Helped new startup exhibit over 30% month-over-month growth",
+      "Led development team in interim as CTO made sudden departure for six months",
+      "Ran development workshops to promote code standards and team cohesion"
     ]
   }
 ]

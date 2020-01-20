@@ -3,6 +3,7 @@
     "title": "Expert",
     "items": [
       "React",
+      "React Native",
       "Javascript",
       "Typescript",
       "Node",
@@ -11,11 +12,6 @@
   },
   {
     "title": "Recreational",
-    "items": [
-      "Kotlin",
-      "Rust",
-      "Elm",
-      "Elixir"
-    ]
+    "items": ["Graphql", "GCloud", "Kotlin", "Rust", "Elm", "Elixir"]
   }
 ]
