@@ -9,7 +9,7 @@ module.exports = {
     siteUrl: `https://gregperlman.dev`,
     social: {
       github: `gperl27`,
-      linkedIn: `gregperlman`
+      linkedIn: `gregperlman`,
     },
   },
   plugins: [
@@ -51,7 +51,7 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-prismjs`
+            resolve: `gatsby-remark-prismjs`,
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
@@ -99,7 +99,8 @@ module.exports = {
         dark: require(`${__dirname}/src/utils/theme.ts`).darkTheme,
       },
     },
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-preload-fonts`,
   ],
   developMiddleware: app => {
     app.use(
@@ -109,7 +110,7 @@ module.exports = {
         pathRewrite: {
           "/.netlify/functions/": "",
         },
-      }),
+      })
     )
   },
 }

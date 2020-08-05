@@ -19,6 +19,10 @@ export const LoadingProvider = (props: LoadingProviderProps) => {
     setDidAppLoad(true)
   }, [])
 
+  if (!didAppLoad) {
+    return null
+  }
+
   return (
     <LoadingContext.Provider value={{ didAppLoad }}>
       {props.children}
