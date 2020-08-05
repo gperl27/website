@@ -1,6 +1,7 @@
 import { PageRendererProps } from "gatsby"
-import React, { ReactNode } from "react"
+import React, { ReactNode, useContext } from "react"
 import styled, { withTheme } from "styled-components"
+import { LoadingContext } from "../contexts/LoadingContext"
 import { GlobalStyle, Theme } from "../utils/theme"
 import { rhythm, styledScale } from "../utils/typography"
 import { LightSwitch } from "./common/LightSwitch"
@@ -75,6 +76,7 @@ const StyledHeader = styled.header`
 `
 
 export const Layout = withTheme((props: Props) => {
+  const { didAppLoad } = useContext(LoadingContext)
   const { location, title, children } = props
   const rootPath = `/`
 
@@ -82,7 +84,7 @@ export const Layout = withTheme((props: Props) => {
 
   return (
     <Content>
-      <GlobalStyle theme={props.theme} />
+      <GlobalStyle theme={props.theme} didAppLoad={didAppLoad} />
       <StyledHeader>
         <HeaderTitle>
           <StyledLink to={`/`}>{title}</StyledLink>

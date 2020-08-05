@@ -95,7 +95,10 @@ export const lightTheme: Theme = {
   },
 }
 
-export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
+export const GlobalStyle = createGlobalStyle<{
+  theme: Theme
+  didAppLoad: boolean
+}>`
   html, body {
     height: 100%; 
   }
@@ -104,7 +107,8 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     background-color: rgb(${props => props.theme.global.bg});
     color: rgb(${props => props.theme.global.color});
     
-    transition: background 0.2s ease-out;
+    transition: background ${props =>
+      props.didAppLoad ? "0.2s" : "0.0s"} ease-out;
   }
   
   a {
