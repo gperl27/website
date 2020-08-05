@@ -1,4 +1,4 @@
-import React, { ReactNode, useLayoutEffect } from "react"
+import React, { ReactNode, useEffect } from "react"
 
 interface LoadingContext {
   didAppLoad: boolean
@@ -15,7 +15,7 @@ interface LoadingProviderProps {
 export const LoadingProvider = (props: LoadingProviderProps) => {
   const [didAppLoad, setDidAppLoad] = React.useState(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setDidAppLoad(true)
   }, [])
 
