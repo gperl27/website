@@ -82,7 +82,6 @@ export const Layout = withTheme((props: Props) => {
 
   return (
     <Content>
-      <GlobalStyle theme={props.theme} />
       <StyledHeader>
         <HeaderTitle>
           <StyledLink to={`/`}>{title}</StyledLink>
@@ -95,4 +94,8 @@ export const Layout = withTheme((props: Props) => {
       <Footer />
     </Content>
   )
+})
+
+export const GlobalStyleWithTheme = withTheme((props: Props) => {
+  return <GlobalStyle theme={props.theme} />
 })
