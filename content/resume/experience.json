@@ -4,12 +4,13 @@
     "from": "October 2019",
     "to": "Present",
     "name": "Wells Fargo",
-    "title": "Senior Software Engineer",
+    "title": "Lead Software Engineer",
     "accomplishments": [
-      "Appointed UI team lead and codeowner for multiple projects",
-      "Introduced advanced testing tools to increase overall team productivity",
-      "Identified as the testing expert on staff",
-      "Played integral role in hiring process and decisions",
+      "Spearheaded division's most important project, focusing on contract design and frontend architecture",
+      "Actively participated in design and architecture meetings to garner best UX experience",
+      "Reviewed all PRs and design decisions for project as the code owner",
+      "Translated requirements from business into tasks and administered work accordingly",
+      "Increased team productivity by introducing advanced testing tools and paradigms",
       "Mentored new hires and established an improved onboarding process"
     ]
   },
