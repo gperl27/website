@@ -1,9 +1,8 @@
-import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
+import { useStyledDarkMode } from "gatsby-styled-components-dark-mode"
 import * as React from "react"
-import { useContext } from "react"
 // tslint:disable-next-line:no-submodule-imports
 import { MdLightbulbOutline } from "react-icons/md"
-import styled, { css, withTheme } from "styled-components"
+import styled, { css } from "styled-components"
 import { rhythm } from "../../utils/typography"
 
 const IsOnStyles = css`
@@ -123,8 +122,13 @@ const StyledInnerContent = styled.div`
   ${props => props.theme.isDark && InnerContentDarkStyles};
 `
 
-export const LightSwitch = withTheme(() => {
-  const themeContext = useContext(ThemeManagerContext)
+export const LightSwitch = () => {
+  const { isDark, toggleDark } = useStyledDarkMode()
+  console.log(isDark, "wat")
+
+  if (typeof isDark === "undefined") {
+    return null
+  }
 
   return (
     <>
@@ -132,13 +136,13 @@ export const LightSwitch = withTheme(() => {
         type="checkbox"
         name="lightSwitch"
         readOnly={true}
-        checked={themeContext.isDark}
+        checked={!!isDark}
       />
-      <StyledLabel onClick={() => themeContext.toggleDark()}>
+      <StyledLabel onClick={() => toggleDark()}>
         <StyledInnerContent>
           <MdLightbulbOutline size={rhythm(1.5)} />
         </StyledInnerContent>
       </StyledLabel>
     </>
   )
-})
+}
