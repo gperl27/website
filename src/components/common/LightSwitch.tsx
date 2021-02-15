@@ -124,7 +124,6 @@ const StyledInnerContent = styled.div`
 
 export const LightSwitch = () => {
   const { isDark, toggleDark } = useStyledDarkMode()
-  console.log(isDark, "wat")
 
   if (typeof isDark === "undefined") {
     return null
