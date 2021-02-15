@@ -1,14 +1,13 @@
-import { graphql, PageRendererProps, useStaticQuery } from "gatsby"
+import { graphql, PageRendererProps, useStaticQuery, Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import { Bio } from "../components/bio"
 import { Layout } from "../components/layout"
-import { FadeLink } from "../components/link"
 import { SEO } from "../components/seo"
 import { MarkdownRemark } from "../graphql-types"
 import { rhythm, styledScale } from "../utils/typography"
 
-const StyledLink = styled(FadeLink)`
+const StyledLink = styled(Link)`
   box-shadow: none;
 `
 

@@ -5,12 +5,11 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
 import React, { ComponentProps, forwardRef, Ref } from "react"
 import styled from "styled-components"
 import { rhythm } from "../utils/typography"
-import { FadeLink } from "./link"
 
 const Content = styled.div`
   display: flex;
@@ -63,9 +62,9 @@ export const Bio = () => {
       <p>
         A personal web-space by
         {` `}
-        <FadeLink to={"/about"}>
+        <Link to={"/about"}>
           <strong>{author}</strong>.{` `}
-        </FadeLink>
+        </Link>
         I apply pressure to keys on a keyboard.
       </p>
     </Content>

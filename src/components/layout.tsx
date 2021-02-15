@@ -1,11 +1,10 @@
-import { PageRendererProps } from "gatsby"
+import { PageRendererProps, Link } from "gatsby"
 import React, { ReactNode, useContext } from "react"
 import styled, { ThemeContext } from "styled-components"
 import { GlobalStyle, Theme } from "../utils/theme"
 import { rhythm, styledScale } from "../utils/typography"
 import { LightSwitch } from "./common/LightSwitch"
 import { Footer } from "./footer"
-import { FadeLink } from "./link"
 
 interface Props extends PageRendererProps {
   title: string
@@ -41,7 +40,7 @@ const SubHeading = styled.h2`
   }
 `
 
-const StyledLink = styled(FadeLink)`
+const StyledLink = styled(Link)`
   box-shadow: none;
   color: inherit;
   text-decoration: none;

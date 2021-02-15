@@ -1,8 +1,7 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
 import * as React from "react"
 import styled, { css } from "styled-components"
 import { rhythm } from "../utils/typography"
-import { FadeLink } from "./link"
 
 const StyledFooter = styled.footer`
   display: flex;
@@ -17,7 +16,7 @@ const LinkStyles = css`
   margin-right: ${rhythm(0.5)};
 `
 
-const StyledLink = styled(FadeLink)`
+const StyledLink = styled(Link)`
   ${LinkStyles};
 `
 
