@@ -113,6 +113,7 @@
     "start:lambda:prod": "netlify-lambda serve --config webpack.production.js lambda",
     "build:lambda": "netlify-lambda build --config webpack.lambda.js lambda",
     "build:lambda:prod": "netlify-lambda build --config webpack.production.js lambda",
-    "preload-fonts": "gatsby-preload-fonts"
+    "preload-fonts": "gatsby-preload-fonts",
+    "postpreload-fonts": "./securePreloadCache.js"
   }
 }
