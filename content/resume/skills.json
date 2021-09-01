@@ -3,11 +3,13 @@
     "title": "Expert",
     "items": [
       "React",
-      "React Native",
-      "Javascript",
       "Typescript",
+      "Javascript",
+      "Webpack",
+      "React Native",
       "Node",
-      "Laravel"
+      "Docker",
+      "Laravel/PHP"
     ]
   },
   {

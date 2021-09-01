@@ -6,12 +6,14 @@
     "name": "Wells Fargo",
     "title": "Lead Software Engineer",
     "accomplishments": [
-      "Spearheaded division's most important project, focusing on contract design and frontend architecture",
-      "Actively participated in design and architecture meetings to garner best UX experience",
-      "Reviewed all PRs and design decisions for project as the code owner",
-      "Translated requirements from business into tasks and administered work accordingly",
-      "Increased team productivity by introducing advanced testing tools and paradigms",
-      "Mentored new hires and established an improved onboarding process"
+      "Led digital-transformation of SBA product, resulting in over a 50% increase in SBA and SBA-related originations",
+      "Championed the team's pipeline migration during a reorg, streamlining all frontend projects` ci/cd configs and distributions",
+      "Leveraged code-splitting and treeshaking across the stack to reduce bundle sizes of apps by at least 30-60%; Lighthouse rankings improved from ~50 to ~90",
+      "Actively participated in high-level design and architecture to ensure best possible experience for devs, business, and, of course, the users",
+      "Codeowned multiple projects, which included designing the architecture and organization, reviewing all PRs, and managing releases",
+      "Introduced advanced testing tools and paradigms, drastically improving developer ergonomics",
+      "Mentored new hires and established an improved onboarding process",
+      "Carried out interviews and worked closely with colleagues to choose awesome candidates"
     ]
   },
   {
