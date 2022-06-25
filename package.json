@@ -39,7 +39,7 @@
     "gatsby-transformer-sharp": "^2.1.18",
     "gsap": "^2.1.2",
     "netlify-lambda": "^1.4.7",
-    "node-fetch": "^2.5.0",
+    "node-fetch": "^2.6.7",
     "prismjs": "^1.16.0",
     "rc-slider": "^8.6.9",
     "rc-tooltip": "^3.7.3",
