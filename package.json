@@ -35,7 +35,7 @@
     "gatsby-remark-smartypants": "^2.0.9",
     "gatsby-source-filesystem": "^2.0.32",
     "gatsby-styled-components-dark-mode": "^2.0.2",
-    "gatsby-transformer-remark": "^2.3.12",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.1.18",
     "gsap": "^2.1.2",
     "netlify-lambda": "^1.4.7",
